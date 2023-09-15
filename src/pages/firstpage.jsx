@@ -24,7 +24,7 @@ const Container = styled.div`
   }
 `;
 const BodyWrapper = styled.div`
-  min-height: calc(100vh - 146px); //푸터 공간 확보
+  min-height: calc(100vh - 151px); //푸터 공간 확보
 `;
 
 const Body = styled.div``;
@@ -112,7 +112,7 @@ const Firstpage = () => {
           </Base>
           <FooterContent>
             <ManagementWrapper>
-              <p class="bold">축제 총 기획</p>
+              <p className="bold">축제 총 기획</p>
               <p>동덕여대 축제 준비 위원회</p>
             </ManagementWrapper>
             <Line>
@@ -124,7 +124,7 @@ const Firstpage = () => {
             </Line>
             <FestivalWrapper>
               <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p class="bold">동덕 uniVERSE</p>
+              <p className="bold">동덕 uniVERSE</p>
             </FestivalWrapper>
             <Line>
               <img
@@ -134,7 +134,7 @@ const Firstpage = () => {
               />
             </Line>
             <DevelopmentWrapper>
-              <p class="bold">축제 웹사이트 제작</p>
+              <p className="bold">축제 웹사이트 제작</p>
               <p>동덕여대 멋쟁이사자처럼</p>
             </DevelopmentWrapper>
           </FooterContent>
