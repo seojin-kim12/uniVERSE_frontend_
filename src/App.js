@@ -1,13 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Firstpage from "./pages/firstpage";
 import "./index.css";
+import IntroFestival from "./pages/introduce/IntroFestival";
 
 function App() {
   return (
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Firstpage />} />
+          <Route path="/" element={<IntroFestival />} />
         </Routes>
       </div>
     </BrowserRouter>
