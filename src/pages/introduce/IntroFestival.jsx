@@ -68,8 +68,13 @@ const BodyWrapper = styled.div`
 const Img = styled.img``;
 const ImgPost = styled.div`
   position: absolute;
-  top: 26%;
+  top: 25.3%;
   margin-left: -20px;
+
+  /*아이폰SE 이하 기준*/
+  @media (max-width: 376px) {
+    top: 24.5%;
+  }
 `;
 const BodyTop1 = styled.div`
   position: absolute;
@@ -97,6 +102,7 @@ const P1 = styled.p`
   font-style: normal;
   font-weight: 900;
   line-height: normal;
+  text-shadow: 0.3px 0.1px 0 #0a0047;
 
   @media (max-width: 376px) {
     left: 41.2%;
@@ -115,6 +121,8 @@ const P2 = styled.p`
   font-style: normal;
   font-weight: 900;
   line-height: normal;
+
+  text-shadow: 0.3px 0.1px 0 #0a0047;
 
   @media (max-width: 376px) {
     left: 72%;
@@ -147,7 +155,7 @@ const BodyMainTitle = styled.div`
 const BodyNameCode = styled.div`
   position: absolute;
 
-  top: 13.8%;
+  top: 14.3%;
   left: 16%;
   color: #fff;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -156,6 +164,28 @@ const BodyNameCode = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  /*아이폰SE 이하 기준*/
+  @media (max-width: 376px) {
+    font-size: 19px;
+    top: 13.9%;
+  }
+`;
+
+const BodyInstagram = styled.div`
+  position: absolute;
+  display: flex;
+  top: 21.3%;
+
+  padding: 2%;
+  padding-left: 35%;
+  width: 100%;
+
+  /*아이폰SE 이하 기준*/
+  @media (max-width: 376px) {
+    top: 21%;
+    padding-left: 33.2%;
+  }
 `;
 
 const BodyContent = styled.div`
@@ -212,6 +242,7 @@ const C3 = styled.p`
 `;
 
 const Footer = styled.div`
+  margin-top: 20px;
   height: 150px;
   position: relative;
 `;
@@ -275,6 +306,25 @@ const IntroFestival = () => {
     marginLeft: "10px;",
   };
 
+  const instagramText = {
+    marginRight: "10px",
+    color: "#F5E889",
+    fontFamily: "Inter",
+    fontSize: "12px",
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: "normal",
+  };
+
+  const linkStyle = {
+    color: "#FFF",
+    fontFamily: "Inter",
+    fontSize: "12px",
+    fontStyle: "normal",
+    fontWeight: "400",
+    lineHeight: "normal",
+  };
+
   return (
     <Container>
       <TopContainer>
@@ -308,11 +358,20 @@ const IntroFestival = () => {
           <BodyMainTitle>축제</BodyMainTitle>
 
           <BodyNameCode>동덕 uniVERSE</BodyNameCode>
+          <BodyInstagram>
+            <span style={instagramText}>instagram</span>
+            <a
+              href="https://www.instagram.com/ddwu.festival2023/?igshid=MzRlODBiNWFlZA%3D%3D"
+              style={linkStyle}
+            >
+              @ddwu.festival2023
+            </a>
+          </BodyInstagram>
 
           <ImgPost>
             <img
               src={`${process.env.PUBLIC_URL}/images/intro-images/post.png`}
-              width="66%"
+              width="70%"
             />
           </ImgPost>
           <Img
