@@ -198,11 +198,11 @@ const BodyContent = styled.div`
 
   /*아이폰SE 이하 기준*/
   @media (max-width: 376px) {
-    top: 58.8%;
+    top: 54%;
   }
 `;
 
-const C1 = styled.p`
+const C1 = styled.span`
   color: #f5e889;
   text-align: center;
   font-family: SUIT;
@@ -213,10 +213,10 @@ const C1 = styled.p`
 
   /*아이폰SE 이하 기준*/
   @media (max-width: 376px) {
-    font-size: 13px;
+    font-size: 12px;
   }
 `;
-const C2 = styled.p`
+const C2 = styled.span`
   color: #fff;
   font-family: SUIT;
   font-size: 11px;
@@ -225,19 +225,19 @@ const C2 = styled.p`
   line-height: normal;
 
   @media (max-width: 376px) {
-    font-size: 10.5px;
+    font-size: 10.3px;
   }
 `;
 const C3 = styled.p`
-  color: #f5e889;
+  color: #fff;
   font-family: SUIT;
-  font-size: 12px;
+  font-size: 11px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 300;
   line-height: normal;
 
   @media (max-width: 376px) {
-    font-size: 12px;
+    font-size: 10.3px;
   }
 `;
 
@@ -380,30 +380,42 @@ const IntroCommittee = () => {
           />
 
           <BodyContent>
-            <C1>축제운영위원회는</C1>
-            <C2>
-              잠을 깨우는 낯선 이의 무전 소리.
-              <br />
-              다급한 목소리에 두 눈을 떠보니 보이는 건,
-              <br />
-              어딘가 묘한 기시감을 풍기는 학교의 모습이었다.
-              <br /> 똑같은 학교의 건물들과 풍경. 하지만 이유모를 낯선 이 느낌.
-              <br /> 분명, 우리 학교이지만 낯선 이 곳. 
-              <br /> 혹시 영화 속에서만 보던 또 다른 시공간인 멀티버스는
-              아닐까…?
-            </C2>
+            <C1>축제운영위원회</C1>
+            <C2>는</C2>
             <C3>
-              그 순간, 밤이 찾아오고 이전엔 볼 수 없었던
-              <br /> 화려한 우주 사이로 빨려 들어가게 되는데…!
-            </C3>
-            <C2>
-              우리가 만난다는 것은 너의 우주와 나의 우주가 맞닿아 있음을 뜻한다.
+              전 재학생을 위해 대동제를 비롯한 문화사업 운영 업무를 총괄하는
               <br />
-              우리는 얼마나 많은 우주들을 공유하고 확장하며 살아가고 있는가.
-            </C2>
-            <C3>
-              우주, 만남, 확장, 또다른 세상(멀티버스) UNIVERSE,
-              <br /> ENCOUNTER, EXPANSION, MULTIVERSE
+              특별기구입니다.
+              <C3>
+                축제운영위원회는{" "}
+                <strong>
+                  위원장단, 기획국, 무대국, 사무국, 행사국, 홍보국
+                </strong>
+                <br />
+                으로 이루어져 있으며,
+                <br /> <strong>37명의 구성원</strong>이 3기 국원으로 활동하고
+                있습니다.
+              </C3>
+              <C3>
+                올해부터는 대동제 뿐만 아니라 매월 ‘오솜도솜데이’라는
+                <br /> 월간 문화 사업을 진행하고 있습니다.
+                <br />
+                <strong>‘오솜도솜데이’</strong>는 학우들에게 다양한 문화와
+                관련된 즐길거리를
+                <br />
+                제공하고 있습니다.
+                <br /> 지난 4월 오솜도솜데이에서는 학우들의 폴라로이드 사진을
+                찍어주고
+                <br /> 직접 스티커로 꾸미는 ‘솜라로이드 러브’ 행사를 진행하였고,
+                <br /> 5월 오솜도솜데이에서는 다가오는 더위를 맞아
+                <br /> 퀴즈를 맞히는 학우들에게 시원한 슬러시를 배부하는
+                ‘동동매점’ 행사를
+                <br />
+                진행하였습니다.
+              </C3>
+              <br /> 또한 3기에서는 영상팀이 신설되어 축운위의 행사 진행 모습이
+              <br /> 생생하게 담긴 VLOG 영상도 공개 예정이니 많은 관심
+              부탁드립니다!
             </C3>
           </BodyContent>
         </Body>
