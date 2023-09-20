@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Firstpage from "./pages/firstpage";
+import Mappage1 from "./pages/mappage1";
+import BoothSearch from "./pages/Search/BoothSearch";
 import "./index.css";
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Firstpage />} />
+          <Route path="/Mappage1" element={<Mappage1 />} />
+          <Route path="/BoothSearch" element={<BoothSearch />} />
         </Routes>
       </div>
     </BrowserRouter>
