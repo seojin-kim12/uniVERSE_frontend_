@@ -145,6 +145,8 @@ const BoothPic = styled.div`
   width: 95px;
   height: 95px;
   display: inline-block;
+  border-radius: 14px;
+  border: 1px solid #4fdfff;
 `;
 const BoothContent = styled.div`
   margin-right: auto;
@@ -293,7 +295,7 @@ const BoothSearch = () => {
                 style={getBorderStyle("six")}
                 onClick={() => handleElementClick("six")}
               >
-                09/FRI
+                06/FRI
               </Six>
             </DateWrapper>
             <Line>
@@ -321,78 +323,6 @@ const BoothSearch = () => {
                     주제로 이루어져 있습니다. 최후의 3인에게는 달에 착륙할 수
                     있는 기회와 어마어마한 상품이 주어집니다.
                   </Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>우주 속 지구를 낚아라</BoothName>
-                  <Boothintro>
-                    깜깜한 우주에서 지구를 찾고 상품도 얻어가세요!
-                  </Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>세번째</BoothName>
-                  <Boothintro>세번째설명</Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>네번째</BoothName>
-                  <Boothintro>네번째설명</Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>다섯번째</BoothName>
-                  <Boothintro>다섯번째설명</Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>여섯번째</BoothName>
-                  <Boothintro>여섯번째설명</Boothintro>
                 </BoothContent>
               </BoothWrapper>
             </ContentBox>

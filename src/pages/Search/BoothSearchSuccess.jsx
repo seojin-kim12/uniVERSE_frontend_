@@ -152,6 +152,8 @@ const BoothPic = styled.div`
   width: 91px;
   height: 91px;
   display: inline-block;
+  border-radius: 14px;
+  border: 1px solid #4fdfff;
 `;
 const BoothContent = styled.div`
   display: inline-block;
@@ -311,7 +313,7 @@ const BoothSearchSuccess = () => {
                 style={getBorderStyle("six")}
                 onClick={() => handleElementClick("six")}
               >
-                09/FRI
+                06/FRI
               </Six>
             </DateWrapper>
             <Line>

@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Mappage1 from "./pages/mappage1";
-import Mappage3 from "./pages/mappage3";
+import Mappage1 from "./pages/mappage/mappage1";
+import Mappage3 from "./pages/mappage/mappage3";
 import BoothSearch from "./pages/Search/BoothSearch";
 import BoothSearchFail from "./pages/Search/BoothSearchFail";
 import BoothSearchSuccess from "./pages/Search/BoothSearchSuccess";
