@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Firstpage from "./pages/firstpage";
 import "./index.css";
 import Mappage1 from "./pages/mappage1";
 import Mappage3 from "./pages/mappage3";
