@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Firstpage from "./pages/firstpage";
+import Battle from "./pages/Battle";
 import Mappage1 from "./pages/mappage/mappage1";
 import Mappage3 from "./pages/mappage/mappage3";
 import BoothSearch from "./pages/Search/BoothSearch";
@@ -10,6 +12,8 @@ function App() {
     <BrowserRouter>
       <div>
         <Routes>
+          <Route path="/" element={<Firstpage />} />
+          <Route path="/Battle" element={<Battle />} />
           <Route path="/Mappage1" element={<Mappage1 />} />
           <Route path="/Mappage3" element={<Mappage3 />} />
           <Route path="/BoothSearch" element={<BoothSearch />} />
