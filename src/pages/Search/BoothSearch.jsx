@@ -145,6 +145,8 @@ const BoothPic = styled.div`
   width: 95px;
   height: 95px;
   display: inline-block;
+  border-radius: 14px;
+  border: 1px solid #4fdfff;
 `;
 const BoothContent = styled.div`
   margin-right: auto;
