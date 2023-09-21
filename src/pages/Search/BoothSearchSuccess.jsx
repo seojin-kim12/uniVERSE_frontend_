@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useStarField, createStarsState } from "starfield-react";
 
 const Container = styled.div`
   display: flex;
@@ -244,23 +243,6 @@ const Right = styled.div`
   right: 17%;
   top: -3px;
 `;
-const StarFieldCustom = ({ width, height }) => {
-  const canvasRef = useRef(null);
-
-  // 별들을 다루기 위한 옵션 설정
-  const options = {
-    count: 1000,
-    height: height, // 부모 컴포넌트로부터 전달받은 높이 사용
-    width: width, // 부모 컴포넌트로부터 전달받은 너비 사용
-  };
-
-  const stateReference = useRef(createStarsState(options));
-
-  // useStarField 훅 사용
-  useStarField(canvasRef, options, stateReference);
-
-  return <canvas ref={canvasRef} width={width} height={height} />;
-};
 
 const BoothSearchSuccess = () => {
   const navigate = useNavigate();
@@ -285,7 +267,6 @@ const BoothSearchSuccess = () => {
 
   return (
     <Container>
-      <StarFieldCustom width="1000px" height="1000px" />
       <BodyWrapper>
         <Topbar>
           <Back>
@@ -293,7 +274,6 @@ const BoothSearchSuccess = () => {
               src={`${process.env.PUBLIC_URL}/images/back.png`}
               width="24px"
               height="24px"
-              onClick={() => navigateToBack()}
             />
           </Back>
           <Toptitle>부스 배치도</Toptitle>
