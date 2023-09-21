@@ -123,7 +123,7 @@ const TitleBarText = styled.div`
   color: #fff;
   text-align: center;
   font-family: SUIT;
-  font-size: 24px;
+  font-size: 23px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -211,11 +211,11 @@ const RankBox = styled.div`
 `;
 const ImgBox = styled.div`
   position: relative;
-  left: -12px;
+  left: -12.5px;
 `;
 const TopText = styled.div`
   position: relative;
-  top: -99px;
+  top: -98px;
   left: -3px;
 `;
 const RankText = styled.div`
@@ -255,7 +255,7 @@ const CompetDetail = () => {
               style={{
                 width: "100%",
                 height: "auto",
-                display: "block",
+                maxHeight: "60px",
               }}
               alt="titlebar"
             />
