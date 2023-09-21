@@ -1,9 +1,10 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./index.css";
-
+import Mappage1 from "./pages/mappage1";
+import Mappage3 from "./pages/mappage3";
 import BoothSearch from "./pages/Search/BoothSearch";
 import BoothSearchFail from "./pages/Search/BoothSearchFail";
 import BoothSearchSuccess from "./pages/Search/BoothSearchSuccess";
+import "./index.css";
 import Mappage1 from "./pages/mappage1";
 import Mappage3 from "./pages/mappage3";
 function App() {

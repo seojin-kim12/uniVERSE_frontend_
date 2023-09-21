@@ -246,6 +246,9 @@ const Right = styled.div`
 
 const BoothSearchSuccess = () => {
   const navigate = useNavigate();
+  const navigateToBack = () => {
+    navigate(-1);
+  };
 
   // 기본 클릭 요소 설정
   const [clickedElement, setClickedElement] = useState("four");
@@ -274,6 +277,7 @@ const BoothSearchSuccess = () => {
               src={`${process.env.PUBLIC_URL}/images/back.png`}
               width="24px"
               height="24px"
+              onClick={() => navigateToBack()}
             />
           </Back>
           <Toptitle>부스 배치도</Toptitle>
