@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -27,14 +28,9 @@ const Container = styled.div`
 
 const TopContainer = styled.div`
   /*기본스타일*/
+  margin: 0px auto;
   width: 100%;
   height: 80px;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    width: 100%;
-    height: 70px;
-  }
 `;
 const GoBack = styled.img`
   width: 7%;
@@ -53,11 +49,6 @@ const TopText = styled.div`
   font-style: normal;
   font-weight: 900;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 22px;
-  }
 `;
 
 const BodyWrapper = styled.div`
@@ -68,16 +59,13 @@ const BodyWrapper = styled.div`
 const Img = styled.img``;
 const ImgPost = styled.div`
   position: absolute;
+  margin: 0px auto;
   top: 28%;
   margin-left: -20px;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 24.5%;
-  }
 `;
 const BodyTop1 = styled.div`
   position: absolute;
+  margin: 0px auto;
   display: flex;
 
   width: 100%;
@@ -135,9 +123,9 @@ const Body = styled.div`
 `;
 const BodyMainTitle = styled.div`
   position: absolute;
-
-  margin-left: 40%;
-  margin-top: 1.5%;
+  margin: 0px auto;
+  left: 45%;
+  top: 8.6%;
 
   color: #f5e889;
   font-family: SUIT;
@@ -145,11 +133,6 @@ const BodyMainTitle = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 12.5px;
-  }
 `;
 
 const BodyNameCode = styled.div`
@@ -164,16 +147,11 @@ const BodyNameCode = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 19px;
-    top: 13.9%;
-  }
 `;
 
 const BodyInstagram = styled.div`
   position: absolute;
+  margin: 0px auto;
   display: flex;
   top: 21.3%;
 
@@ -190,6 +168,7 @@ const BodyInstagram = styled.div`
 
 const BodyContent = styled.div`
   position: absolute;
+  margin: 0px auto;
   top: 54%;
   left: 3.3%;
   padding-top: 5%;
@@ -301,6 +280,17 @@ const Right = styled.div`
 `;
 
 const IntroCommittee = () => {
+  const navigate = useNavigate();
+
+  const GoFestival = () => {
+    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
+    navigate("/Festival");
+  };
+  const GoLion = () => {
+    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
+    navigate("/");
+  };
+
   const imageStyle = {
     marginRight: "32%",
     marginLeft: "10px;",
@@ -343,16 +333,18 @@ const IntroCommittee = () => {
               height="26px"
               style={imageStyle}
               alt="body-top-middle"
+              onClick={GoFestival}
             />
-            <P1>축제</P1>
+            <P1 onClick={GoFestival}>축제</P1>
 
             <img
               src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-end.png`}
               width="29%"
               height="26px"
               alt="body-top-end"
+              onClick={GoLion}
             />
-            <P2>멋사 11기</P2>
+            <P2 onClick={GoLion}>멋사 11기</P2>
           </BodyTop1>
           <BodyMainTitle>축.운.위</BodyMainTitle>
 

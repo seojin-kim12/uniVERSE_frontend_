@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -26,15 +28,10 @@ const Container = styled.div`
 `;
 
 const TopContainer = styled.div`
+  margin: 0px auto;
   /*기본스타일*/
   width: 100%;
   height: 80px;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    width: 100%;
-    height: 70px;
-  }
 `;
 const GoBack = styled.img`
   width: 7%;
@@ -53,11 +50,6 @@ const TopText = styled.div`
   font-style: normal;
   font-weight: 900;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 22px;
-  }
 `;
 
 const BodyWrapper = styled.div`
@@ -70,24 +62,45 @@ const ImgPost = styled.div`
   position: absolute;
   top: 15%;
   margin-left: -20px;
+`;
+const ImgPostText = styled.div`
+  color: #fff;
+  text-align: center;
+  font-family: SUIT;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+`;
+const S1 = styled.span`
+  color: #f5e889;
+  font-family: SUIT;
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 24.5%;
-  }
+  text-shadow: 0.1px 0.1px 0px #f5e889;
+`;
+
+const S2 = styled.span`
+  color: #fff;
+  font-family: SUIT;
+  font-size: 11.5px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+
+  text-shadow: 0.1px 0.1px 0px #fff;
 `;
 const BodyTop1 = styled.div`
   position: absolute;
+  margin: 0px auto;
+  top: 5.25%;
   display: flex;
 
   width: 100%;
   height: 28px;
-  margin-top: -1%;
-
-  /*아이폰SE 기준*/
-  @media (max-width: 376px) {
-    margin-top: -1%;
-  }
 `;
 
 const P1 = styled.p`
@@ -103,10 +116,6 @@ const P1 = styled.p`
   font-weight: 900;
   line-height: normal;
   text-shadow: 0.3px 0.1px 0 #0a0047;
-
-  @media (max-width: 376px) {
-    left: 6.6%;
-  }
 `;
 
 const P2 = styled.p`
@@ -123,10 +132,6 @@ const P2 = styled.p`
   line-height: normal;
 
   text-shadow: 0.3px 0.1px 0 #0a0047;
-
-  @media (max-width: 376px) {
-    left: 67.5%;
-  }
 `;
 
 const Body = styled.div`
@@ -145,15 +150,11 @@ const BodyMainTitle = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 12.5px;
-  }
 `;
 
 const BodyNameCode = styled.div`
   position: absolute;
+  margin: 0px auto;
 
   top: 9.4%;
   left: 14%;
@@ -164,81 +165,37 @@ const BodyNameCode = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 19px;
-    top: 13.9%;
-  }
 `;
 
 const BodyInstagram = styled.div`
   position: absolute;
+  margin: 0px auto;
   display: flex;
   top: 13.6%;
 
   padding: 2%;
   padding-left: 35%;
   width: 100%;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 21%;
-    padding-left: 33.2%;
-  }
 `;
 
-const BodyContent = styled.div`
+const Front = styled.div`
+  margin: 0px auto;
   position: absolute;
-  top: 54%;
-  left: 3.3%;
-  padding-top: 5%;
-  width: 93%;
-  height: 23%;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 54%;
-  }
+  top: 674px;
+  left: 25%;
+`;
+const Back = styled.div`
+  margin: 0px auto;
+  position: absolute;
+  top: 1030px;
+  left: 30%;
 `;
 
-const C1 = styled.span`
-  color: #f5e889;
-  text-align: center;
-  font-family: SUIT;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 12px;
-  }
-`;
-const C2 = styled.span`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-
-  @media (max-width: 376px) {
-    font-size: 10.3px;
-  }
-`;
-const C3 = styled.p`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-
-  @media (max-width: 376px) {
-    font-size: 10.3px;
-  }
+const Design = styled.div`
+  position: absolute;
+  margin: 0px auto;
+  top: 1370px;
+  left: 31%;
 `;
 
 const Footer = styled.div`
@@ -301,6 +258,16 @@ const Right = styled.div`
 `;
 
 const IntroLion = () => {
+  const navigate = useNavigate();
+
+  const GoFestival = () => {
+    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
+    navigate("/Festival");
+  };
+  const GoCommittee = () => {
+    navigate("/Committee");
+  };
+
   const imageStyle = {
     marginRight: "1.5%",
     marginLeft: "10px;",
@@ -343,16 +310,18 @@ const IntroLion = () => {
               height="26px"
               style={imageStyle}
               alt="body-top-middle"
+              onClick={GoFestival}
             />
-            <P1>축제</P1>
+            <P1 onClick={GoFestival}>축제</P1>
 
             <img
               src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-middle.png`}
               width="30%"
               height="26px"
               alt="body-top-end"
+              onClick={GoCommittee}
             />
-            <P2>축.운.위</P2>
+            <P2 onClick={GoCommittee}>축.운.위</P2>
           </BodyTop1>
           <BodyMainTitle>멋사 11기</BodyMainTitle>
 
@@ -367,71 +336,104 @@ const IntroLion = () => {
             </a>
           </BodyInstagram>
 
-          <ImgPost align="center">
-            <div style={{ textAlign: "center" }}>
-              <span style={{ marginRight: "6px" }}>
+          <ImgPost>
+            <div
+              style={{
+                height: "38px",
+                paddingTop: "3px",
+                marginBottom: "5px",
+              }}
+            >
+              <span
+                style={{
+                  position: "absolute",
+                  paddingTop: "12px",
+                  marginLeft: "-18%",
+                }}
+              >
                 <img
                   src={`${process.env.PUBLIC_URL}/images/intro-images/lionLogo.png`}
-                  width="30%"
+                  width="110px"
                 />
               </span>
-              <span>
+              <span
+                style={{
+                  paddingTop: "9px",
+                  position: "absolute",
+                  marginLeft: "12.3%",
+                }}
+              >
                 <img
                   src={`${process.env.PUBLIC_URL}/images/intro-images/dongLogo.png`}
-                  width="8%"
+                  width="27px"
                 />
               </span>
             </div>
             <img
               src={`${process.env.PUBLIC_URL}/images/intro-images/we.png`}
-              width="70%"
+              width="58%"
             />
+
+            <ImgPostText>
+              <span>연합 동아리 </span>
+              <S1>멋쟁이 사자처럼</S1>
+              <span>
+                은 현재 국내에서
+                <br />
+              </span>
+              가장 많은 학생들이 활동하고 있는
+              <br /> 프로그래밍 교육 동아리입니다.
+              <br />
+              전국의 대학이 함께하는 연합 코딩 동아리로
+              <br /> 각종 스터디를 통해 여러 아이디어의 실현에 도전합니다.
+              <br /> <S2>“내 아이디어를 내 손으로 실현한다.”</S2>
+              라는 가치 아래
+              <br /> 창업과 서비스 개발 등 아이디어를 내 손으로 실현할 수 있는
+              <br /> 다양한 교육과 기회를 제공합니다.
+            </ImgPostText>
           </ImgPost>
+
+          <Front>
+            <p>
+              <Img
+                src={`${process.env.PUBLIC_URL}/images/intro-images/Line1.png`}
+                height="64px"
+                alt="첫줄"
+              />
+            </p>
+            <p>
+              <Img
+                src={`${process.env.PUBLIC_URL}/images/intro-images/Line2.png`}
+                height="64px"
+                alt="2"
+              />
+            </p>
+            <Img
+              src={`${process.env.PUBLIC_URL}/images/intro-images/Line3.png`}
+              height="64px"
+              alt="3"
+            />
+          </Front>
+          <Back>
+            <Img
+              src={`${process.env.PUBLIC_URL}/images/intro-images/Back.png`}
+              height="212px"
+              alt="back"
+            />
+          </Back>
+          <Design>
+            <Img
+              src={`${process.env.PUBLIC_URL}/images/intro-images/Design.png`}
+              height="140px"
+              alt="디자인"
+            />
+          </Design>
+
           <Img
             src={`${process.env.PUBLIC_URL}/images/intro-images/Frame-lion.png`}
             width="100%"
-            alt="body-top-first"
+            alt="프레임이미지"
           />
-
-          <BodyContent>
-            <C1>축제운영위원회</C1>
-            <C2>는</C2>
-            <C3>
-              전 재학생을 위해 대동제를 비롯한 문화사업 운영 업무를 총괄하는
-              <br />
-              특별기구입니다.
-              <C3>
-                축제운영위원회는{" "}
-                <strong>
-                  위원장단, 기획국, 무대국, 사무국, 행사국, 홍보국
-                </strong>
-                <br />
-                으로 이루어져 있으며,
-                <br /> <strong>37명의 구성원</strong>이 3기 국원으로 활동하고
-                있습니다.
-              </C3>
-              <C3>
-                올해부터는 대동제 뿐만 아니라 매월 ‘오솜도솜데이’라는
-                <br /> 월간 문화 사업을 진행하고 있습니다.
-                <br />
-                <strong>‘오솜도솜데이’</strong>는 학우들에게 다양한 문화와
-                관련된 즐길거리를
-                <br />
-                제공하고 있습니다.
-                <br /> 지난 4월 오솜도솜데이에서는 학우들의 폴라로이드 사진을
-                찍어주고
-                <br /> 직접 스티커로 꾸미는 ‘솜라로이드 러브’ 행사를 진행하였고,
-                <br /> 5월 오솜도솜데이에서는 다가오는 더위를 맞아
-                <br /> 퀴즈를 맞히는 학우들에게 시원한 슬러시를 배부하는
-                ‘동동매점’ 행사를
-                <br />
-                진행하였습니다.
-              </C3>
-              <br /> 또한 3기에서는 영상팀이 신설되어 축운위의 행사 진행 모습이
-              <br /> 생생하게 담긴 VLOG 영상도 공개 예정이니 많은 관심
-              부탁드립니다!
-            </C3>
-          </BodyContent>
         </Body>
       </BodyWrapper>
 

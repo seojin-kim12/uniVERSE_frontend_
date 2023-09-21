@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -27,14 +28,9 @@ const Container = styled.div`
 
 const TopContainer = styled.div`
   /*기본스타일*/
+  margin: 0px auto;
   width: 100%;
   height: 80px;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    width: 100%;
-    height: 70px;
-  }
 `;
 const GoBack = styled.img`
   width: 7%;
@@ -67,27 +63,18 @@ const BodyWrapper = styled.div`
 
 const Img = styled.img``;
 const ImgPost = styled.div`
+  margin: 0px auto;
   position: absolute;
+  margin-left: -4.4%;
   top: 25.3%;
-  margin-left: -20px;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 24.5%;
-  }
 `;
 const BodyTop1 = styled.div`
   position: absolute;
   display: flex;
+  margin: 0px auto;
   padding-left: 33%;
   padding-right: 5%;
   margin-top: -0.6%;
-
-  /*아이폰SE 기준*/
-  @media (max-width: 376px) {
-    margin-top: -1%;
-    margin-right: 0.4%;
-  }
 `;
 
 const P1 = styled.p`
@@ -103,10 +90,6 @@ const P1 = styled.p`
   font-weight: 900;
   line-height: normal;
   text-shadow: 0.3px 0.1px 0 #0a0047;
-
-  @media (max-width: 376px) {
-    left: 41.2%;
-  }
 `;
 
 const P2 = styled.p`
@@ -123,13 +106,10 @@ const P2 = styled.p`
   line-height: normal;
 
   text-shadow: 0.3px 0.1px 0 #0a0047;
-
-  @media (max-width: 376px) {
-    left: 72%;
-  }
 `;
 
 const Body = styled.div`
+  margin: 0px auto;
   width: 90%;
   margin: 0px auto;
 `;
@@ -141,19 +121,15 @@ const BodyMainTitle = styled.div`
 
   color: #f5e889;
   font-family: SUIT;
-  font-size: 14.5px;
+  font-size: 13px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 16px;
-  }
 `;
 
 const BodyNameCode = styled.div`
   position: absolute;
+  margin: 0px auto;
 
   top: 14.3%;
   left: 16%;
@@ -174,6 +150,7 @@ const BodyNameCode = styled.div`
 
 const BodyInstagram = styled.div`
   position: absolute;
+  margin: 0px auto;
   display: flex;
   top: 21.3%;
 
@@ -190,6 +167,7 @@ const BodyInstagram = styled.div`
 
 const BodyContent = styled.div`
   position: absolute;
+  margin: 0px auto;
   top: 60%;
   left: 3.3%;
   padding-top: 5%;
@@ -301,6 +279,17 @@ const Right = styled.div`
 `;
 
 const IntroFestival = () => {
+  const navigate = useNavigate();
+
+  const GoCommittee = () => {
+    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
+    navigate("/Committee");
+  };
+  const GoLion = () => {
+    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
+    navigate("/");
+  };
+
   const imageStyle = {
     marginRight: "13px",
     marginLeft: "10px;",
@@ -343,8 +332,9 @@ const IntroFestival = () => {
               height="26px"
               style={imageStyle}
               alt="body-top-middle"
+              onClick={GoCommittee}
             />
-            <P1>축.운.위</P1>
+            <P1 onClick={GoCommittee}>축.운.위</P1>
 
             <img
               src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-end.png`}
@@ -352,8 +342,9 @@ const IntroFestival = () => {
               height="26px"
               style={imageStyle}
               alt="body-top-end"
+              onClick={GoLion}
             />
-            <P2>멋사 11기</P2>
+            <P2 onClick={GoLion}>멋사 11기</P2>
           </BodyTop1>
           <BodyMainTitle>축제</BodyMainTitle>
 
