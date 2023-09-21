@@ -191,6 +191,9 @@ const Right = styled.div`
 
 const Mappage3 = () => {
   const navigate = useNavigate();
+  const navigateToBack = () => {
+    navigate(-1);
+  };
 
   return (
     <Container>
@@ -202,7 +205,7 @@ const Mappage3 = () => {
                 src={`${process.env.PUBLIC_URL}/images/back.png`}
                 width="24px"
                 height="24px"
-                onClick={() => navigate(-1)}
+                onClick={() => navigateToBack()}
               />
             </Back>
           </Topbar>

@@ -195,7 +195,9 @@ const Mappage1 = () => {
               alt="boothdetail_button"
               onClick={goDeatil}
             />
-            <Boothdetail_ment>부스 보러가기</Boothdetail_ment>
+            <Boothdetail_ment onClick={goDeatil}>
+              부스 보러가기
+            </Boothdetail_ment>
           </Boothdetail_button>
         </Body>
       </BodyWrapper>
