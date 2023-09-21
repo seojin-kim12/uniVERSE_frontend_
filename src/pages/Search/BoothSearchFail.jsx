@@ -1,16 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  text-align: center;
-  background-color: black;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  align-items: center;
+  text-align: center;\
+  background-color: #000204;
+
   /* 미디어 쿼리 적용 */
   /* pc화면에서 너비를 390로 고정합니다*/
   @media (hover: hover) {
@@ -24,14 +23,9 @@ const Container = styled.div`
   }
 `;
 const BodyWrapper = styled.div`
-  min-height: calc(100vh - 150px); //푸터 공간 확보
+  min-height: calc(100vh - 151px); //푸터 공간 확보
 `;
 
-const Body = styled.div`
-  align-items: center;
-  height: 100%;
-  padding: 0 5.5%;
-`;
 const Topbar = styled.div`
   display: flex;
   justify-content: space-between;
@@ -56,39 +50,79 @@ const Toptitle = styled.div`
   line-height: normal;
   padding-bottom: 5px;
 `;
-const Map = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  margin-top: 60px;
-  padding-bottom: 30%;
+
+const Body = styled.div`
+  height: 100%;
+  padding: 0 5.5%;
 `;
-const Mapframe = styled.div`
-  position: absolute;
-  margin-top: -29px;
-`;
-const Boothdetail_button = styled.div`
-  position: relative;
-  margin: auto;
+const SearchWrapper = styled.div`
+  width: 315px;
+  height: 30px;
+  border: 1px solid #4fdfff;
+  background: #152e46;
   display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
   align-items: center;
-  flex-direction: column; /* 수직 중앙 정렬 */
-  cursor: pointer;
-  padding-bottom: 40%;
+  border-radius: 5px;
 `;
 
-const Boothdetail_ment = styled.div`
-  position: absolute;
+const Search = styled.input`
+  height: 30px;
+  width: 76%;
+  padding-left: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
   color: #4fdfff;
-  font-family: SUIT;
-  font-size: 15px;
+  font-size: 14px;
+  &::placeholder {
+    color: #4fdfff;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  &:focus {
+    border: none;
+    outline: none;
+    font-weight: 700;
+  }
+`;
+
+const SearchButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+const ContentWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 20px 0 8px;
+`;
+const DateWrapper = styled.div`
+  color: #fff;
+  font-size: 18px;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 300;
   line-height: normal;
-  top: 50%; /* 부스 버튼의 중앙에서 위로 50% 이동 */
-  transform: translateY(-50%); /* 위로 이동해서 수직 중앙 정렬 */
-  padding-bottom: 40%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+  height: 30px;
+`;
+const Four = styled.div``;
+const Five = styled.div``;
+const Six = styled.div``;
+const ContentBox = styled.div`
+  margin-top: 35px;
+  margin-bottom: 19px;
+  color: #4fdfff;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: left;
+  padding-left: 17px;
 `;
 
 const Footer = styled.div`
@@ -151,52 +185,84 @@ const Right = styled.div`
   top: -3px;
 `;
 
-const Mappage1 = () => {
+const BoothSearchFail = () => {
   const navigate = useNavigate();
-  const goDeatil = () => {
-    navigate("/BoothSearch");
+  const navigateToBack = () => {
+    navigate(-1);
   };
+
+  const [clickedElement, setClickedElement] = useState(null);
+
+  const handleElementClick = (element) => {
+    setClickedElement(element);
+  };
+  useEffect(() => {
+    setClickedElement("four");
+  }, []);
+
+  const getBorderStyle = (element) => ({
+    color: "#FFF",
+    fontSize: "18px",
+    fontWeight: clickedElement === element ? "700" : "400", // 클릭한 요소에만 bolder 스타일 적용
+    cursor: "pointer",
+  });
+
   return (
     <Container>
       <BodyWrapper>
+        <Topbar>
+          <Back>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/back.png`}
+              width="24px"
+              height="24px"
+              onClick={() => navigateToBack()}
+            />
+          </Back>
+          <Toptitle>부스 배치도</Toptitle>
+        </Topbar>
         <Body>
-          <Topbar>
-            <Back>
+          <SearchWrapper>
+            <Search placeholder="부스 이름을 검색하세요." />
+            <SearchButton>
               <img
-                src={`${process.env.PUBLIC_URL}/images/back.png`}
-                width="24px"
-                height="24px"
-                onClick={() => navigate(-1)}
+                src={`${process.env.PUBLIC_URL}/images/search-button.png`}
+                width="17px"
+                height="17px"
               />
-            </Back>
-            <Toptitle>부스 배치도</Toptitle>
-          </Topbar>
-          <Map>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
-              width="280px"
-              height="280px"
-              alt="map"
-            />
-            <Mapframe>
+            </SearchButton>
+          </SearchWrapper>
+          <ContentWrapper>
+            <DateWrapper>
+              <Four
+                style={getBorderStyle("four")}
+                onClick={() => handleElementClick("four")}
+              >
+                04/WED
+              </Four>
+              <Five
+                style={getBorderStyle("five")}
+                onClick={() => handleElementClick("five")}
+              >
+                05/THU
+              </Five>
+              <Six
+                style={getBorderStyle("six")}
+                onClick={() => handleElementClick("six")}
+              >
+                09/FRI
+              </Six>
+            </DateWrapper>
+            <Line>
               <img
-                src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
-                width="337px"
-                height="338.5px"
-                alt="map"
+                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                width="100%"
+                height="1px"
+                alt="footer"
               />
-            </Mapframe>
-          </Map>
-          <Boothdetail_button>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
-              width="337px"
-              height="62px"
-              alt="boothdetail_button"
-              onClick={goDeatil}
-            />
-            <Boothdetail_ment>부스 보러가기</Boothdetail_ment>
-          </Boothdetail_button>
+            </Line>
+            <ContentBox>검색 결과가 없습니다.</ContentBox>
+          </ContentWrapper>
         </Body>
       </BodyWrapper>
       <Footer>
@@ -256,4 +322,4 @@ const Mappage1 = () => {
     </Container>
   );
 };
-export default Mappage1;
+export default BoothSearchFail;
