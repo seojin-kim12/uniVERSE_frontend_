@@ -311,7 +311,7 @@ const BoothSearchSuccess = () => {
                 style={getBorderStyle("six")}
                 onClick={() => handleElementClick("six")}
               >
-                09/FRI
+                06/FRI
               </Six>
             </DateWrapper>
             <Line>
