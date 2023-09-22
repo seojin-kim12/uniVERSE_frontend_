@@ -6,6 +6,7 @@ import Mappage3 from "./pages/mappage/mappage3";
 import BoothSearch from "./pages/Search/BoothSearch";
 import BoothSearchFail from "./pages/Search/BoothSearchFail";
 import BoothSearchSuccess from "./pages/Search/BoothSearchSuccess";
+import Guestbook from "./pages/Guestbook/Guestbook";
 import "./index.css";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/BoothSearch" element={<BoothSearch />} />
           <Route path="/BoothSearchFail" element={<BoothSearchFail />} />
           <Route path="/BoothSearchSuccess" element={<BoothSearchSuccess />} />
+          <Route path="/Guestbook" element={<Guestbook />} />
         </Routes>
       </div>
     </BrowserRouter>
