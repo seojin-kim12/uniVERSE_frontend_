@@ -251,7 +251,7 @@ const CompetDetail = () => {
           </Box>
           <TitleBar>
             <img
-              src={`${process.env.PUBLIC_URL}/images/titlebar.svg`}
+              src={`${process.env.PUBLIC_URL}/images/titlebar2.svg`}
               style={{
                 width: "100%",
                 height: "auto",
