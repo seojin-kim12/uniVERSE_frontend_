@@ -26,27 +26,28 @@ const Container = styled.div`
     display: none;
   }
 `;
-
+// 상단
 const TopContainer = styled.div`
-  margin: 0px auto;
+  margin-top: 6px;
   /*기본스타일*/
   width: 100%;
-  height: 80px;
+  height: 60px;
 `;
 const GoBack = styled.img`
-  width: 7%;
-  margin-left: -84%;
-  margin-top: 5%;
+  position: relative;
+  width: 25px;
+  top: 10px;
+  left: -37%;
 `;
-const TopText = styled.div`
+const TopText = styled.span`
+design: flex
+  margin: 0px auto;
   width: 60px;
   height: 40px;
-  margin-left: 43%;
-  margin-top: -9%;
-
+  top: 2px;
   color: #fff;
   font-family: SUIT;
-  font-size: 26px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
@@ -57,147 +58,119 @@ const BodyWrapper = styled.div`
   padding-top: 18px;
 `;
 
-const Img = styled.img``;
-const ImgPost = styled.div`
+const TopIndex = styled.div`
   position: absolute;
-  top: 15%;
-  margin-left: -20px;
+  top: 0.2%;
+  left: -2.8%;
+  width: 100%;
+  height: 40px;
+  display: flex;
+
+  color: #0a0047;
+  font-family: SUIT;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
-const ImgPostText = styled.div`
+const Index1 = styled.span`
+  flex: 0.6;
+  padding: 4px;
+  margin-right: 16%;
+  text-shadow: 0.3px 0.3px 0px #0a0047;
+`;
+const Index2 = styled.span`
+  flex: 0.6;
+  padding: 4px;
+  margin-right: 18%;
+  text-shadow: 0.3px 0.3px 0px #0a0047;
+`;
+const Index3 = styled.span`
+  flex: 0.6;
+  padding: 3px;
+
+  color: #f5e889;
+  font-family: SUIT;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+const NameCode = styled.div`
+  color: #fff;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: SUIT;
+  font-size: 17px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const InstagramBox = styled.div`
+  position: absolute;
+  left: 11%;
+
+  top: 10%;
+  width: 100%;
+  height: 20px;
+`;
+const TopBox = styled.div`
+  position: absolute;
+  text-align: center;
+  top: 12.4%;
+  left: 15.4%;
+  width: 70%;
+  height: 21.6%;
+`;
+const LogoBox = styled.div`
+  position: absolute;
+  top: 0%;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 10%;
+
+  display: flex; /* flex 컨테이너로 설정 */
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: center; /* 수직 가운데 정렬 */
+`;
+const AboutLion = styled.div`
+  position: absolute;
+  padding-top: 2%;
+  top: 60%;
+  left: -5%;
+  width: 110%;
+  height: 39%;
+
   color: #fff;
   text-align: center;
   font-family: SUIT;
-  font-size: 11px;
+  font-size: 10.8px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
 `;
-const S1 = styled.span`
-  color: #f5e889;
-  font-family: SUIT;
-  font-size: 11.5px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
 
-  text-shadow: 0.1px 0.1px 0px #f5e889;
-`;
-
-const S2 = styled.span`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 11.5px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-
-  text-shadow: 0.1px 0.1px 0px #fff;
-`;
-const BodyTop1 = styled.div`
+const FrontBox = styled.div`
   position: absolute;
-  margin: 0px auto;
-  top: 5.25%;
-  display: flex;
-
+  top: 39.9%;
   width: 100%;
-  height: 28px;
+  height: 16%;
 `;
-
-const P1 = styled.p`
+const BackBox = styled.div`
   position: absolute;
-  top: -33%;
-  left: 6%;
-  width: 55px;
-
-  color: #0a0047;
-  font-family: SUIT;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-  text-shadow: 0.3px 0.1px 0 #0a0047;
-`;
-
-const P2 = styled.p`
-  position: absolute;
-  top: -33%;
-  left: 36.6%;
-  width: 70px;
-
-  color: #0a0047;
-  font-family: SUIT;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-
-  text-shadow: 0.3px 0.1px 0 #0a0047;
-`;
-
-const Body = styled.div`
-  width: 90%;
-  margin: 0px auto;
-`;
-const BodyMainTitle = styled.div`
-  position: absolute;
-
-  margin-left: 71%;
-  margin-top: 1.5%;
-
-  color: #f5e889;
-  font-family: SUIT;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
-const BodyNameCode = styled.div`
-  position: absolute;
-  margin: 0px auto;
-
-  top: 9.4%;
-  left: 14%;
-  color: #fff;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-family: SUIT;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
-const BodyInstagram = styled.div`
-  position: absolute;
-  margin: 0px auto;
-  display: flex;
-  top: 13.6%;
-
-  padding: 2%;
-  padding-left: 35%;
+  top: 61.9%;
   width: 100%;
+  height: 16%;
+`;
+const DesignBox = styled.div`
+  position: absolute;
+  padding-top: 6%;
+  top: 83.1%;
+  width: 100%;
+  height: 11%;
 `;
 
-const Front = styled.div`
-  margin: 0px auto;
-  position: absolute;
-  top: 674px;
-  left: 25%;
-`;
-const Back = styled.div`
-  margin: 0px auto;
-  position: absolute;
-  top: 1030px;
-  left: 30%;
-`;
-
-const Design = styled.div`
-  position: absolute;
-  margin: 0px auto;
-  top: 1370px;
-  left: 31%;
-`;
-
+//하단
 const Footer = styled.div`
   margin-top: 20px;
   height: 150px;
@@ -268,9 +241,13 @@ const IntroLion = () => {
     navigate("/Committee");
   };
 
-  const imageStyle = {
-    marginRight: "1.5%",
-    marginLeft: "10px;",
+  const TextStrongStyle = {
+    color: "#F5E889",
+    fontFamily: "SUIT",
+    fontSize: "11px",
+    fontStyle: "normal",
+    fontWeight: "700",
+    lineHeight: "normal",
   };
 
   const instagramText = {
@@ -302,139 +279,90 @@ const IntroLion = () => {
       </TopContainer>
 
       <BodyWrapper>
-        <Body>
-          <BodyTop1>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-first.png`}
-              width="29%"
-              height="26px"
-              style={imageStyle}
-              alt="body-top-middle"
-              onClick={GoFestival}
-            />
-            <P1 onClick={GoFestival}>축제</P1>
+        <div style={{ margin: "0px auto", position: "relative" }}>
+          <TopIndex>
+            <Index1>축제</Index1>
+            <Index2>축.운.위</Index2>
+            <Index3>멋사 11기</Index3>
+          </TopIndex>
 
-            <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-middle.png`}
-              width="30%"
-              height="26px"
-              alt="body-top-end"
-              onClick={GoCommittee}
-            />
-            <P2 onClick={GoCommittee}>축.운.위</P2>
-          </BodyTop1>
-          <BodyMainTitle>멋사 11기</BodyMainTitle>
+          <NameCode
+            style={{
+              top: "4.7%", //absolute 쓸거면 top은 %로
+              position: "absolute",
+              left: "18%",
+              // transform: "translateX(-30%)",
+            }}
+          >
+            멋쟁이사자처럼 동덕여대 11기
+          </NameCode>
 
-          <BodyNameCode>멋쟁이사자처럼 동덕여대 11기</BodyNameCode>
-          <BodyInstagram>
+          <InstagramBox>
             <span style={instagramText}>instagram</span>
             <a
-              href="https://instagram.com/dongduk_likelion?igshid=MzRlODBiNWFlZA=="
               style={linkStyle}
+              href="https://instagram.com/dongduk_likelion?igshid=MzRlODBiNWFlZA=="
             >
               @dongduk_likelion
             </a>
-          </BodyInstagram>
+          </InstagramBox>
 
-          <ImgPost>
-            <div
-              style={{
-                height: "38px",
-                paddingTop: "3px",
-                marginBottom: "5px",
-              }}
-            >
-              <span
-                style={{
-                  position: "absolute",
-                  paddingTop: "12px",
-                  marginLeft: "-18%",
-                }}
-              >
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/intro-images/lionLogo.png`}
-                  width="110px"
-                />
-              </span>
-              <span
-                style={{
-                  paddingTop: "9px",
-                  position: "absolute",
-                  marginLeft: "12.3%",
-                }}
-              >
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/intro-images/dongLogo.png`}
-                  width="27px"
-                />
-              </span>
-            </div>
+          <TopBox>
+            <LogoBox>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/lionLogo.png`}
+                width="44%"
+                style={{ marginRight: "2%" }}
+              />
+              <img
+                src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/dongLogo.png`}
+                width="9%"
+              />
+            </LogoBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/we.png`}
-              width="58%"
+              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/we.png`}
+              width="73%"
+              style={{ marginTop: "13%" }}
             />
-
-            <ImgPostText>
-              <span>연합 동아리 </span>
-              <S1>멋쟁이 사자처럼</S1>
-              <span>
-                은 현재 국내에서
-                <br />
-              </span>
-              가장 많은 학생들이 활동하고 있는
+            <AboutLion>
+              연합 동아리 <span style={TextStrongStyle}>멋쟁이 사자처럼</span>은
+              현재 국내에서
+              <br /> 가장 많은 학생들이 활동하고 있는
               <br /> 프로그래밍 교육 동아리입니다.
-              <br />
-              전국의 대학이 함께하는 연합 코딩 동아리로
+              <br /> 전국의 대학이 함께하는 연합 코딩 동아리로
               <br /> 각종 스터디를 통해 여러 아이디어의 실현에 도전합니다.
-              <br /> <S2>“내 아이디어를 내 손으로 실현한다.”</S2>
+              <br /> <strong>“내 아이디어를 내 손으로 실현한다.”</strong>
               라는 가치 아래
-              <br /> 창업과 서비스 개발 등 아이디어를 내 손으로 실현할 수 있는
+              <br />
+              창업과 서비스 개발 등 아이디어를 내 손으로 실현할 수 있는
               <br /> 다양한 교육과 기회를 제공합니다.
-            </ImgPostText>
-          </ImgPost>
+            </AboutLion>
+          </TopBox>
 
-          <Front>
-            <p>
-              <Img
-                src={`${process.env.PUBLIC_URL}/images/intro-images/Line1.png`}
-                height="64px"
-                alt="첫줄"
-              />
-            </p>
-            <p>
-              <Img
-                src={`${process.env.PUBLIC_URL}/images/intro-images/Line2.png`}
-                height="64px"
-                alt="2"
-              />
-            </p>
-            <Img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Line3.png`}
-              height="64px"
-              alt="3"
+          <FrontBox>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/Front.png`}
+              width="57%"
             />
-          </Front>
-          <Back>
-            <Img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Back.png`}
-              height="212px"
-              alt="back"
+          </FrontBox>
+          <BackBox>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/Back.png`}
+              width="44%"
             />
-          </Back>
-          <Design>
-            <Img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Design.png`}
-              height="140px"
-              alt="디자인"
+          </BackBox>
+          <DesignBox>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/Design.png`}
+              width="44%"
             />
-          </Design>
+          </DesignBox>
 
-          <Img
-            src={`${process.env.PUBLIC_URL}/images/intro-images/Frame-lion.png`}
-            width="100%"
-            alt="프레임이미지"
+          <img
+            src={`${process.env.PUBLIC_URL}/images/intro-images/FrameLion.png`}
+            style={{ maxWidth: "88%", height: "auto" }}
           />
-        </Body>
+        </div>
       </BodyWrapper>
 
       <Footer>
