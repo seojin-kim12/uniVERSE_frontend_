@@ -7,11 +7,14 @@ import BoothSearch from "./pages/Search/BoothSearch";
 import BoothSearchFail from "./pages/Search/BoothSearchFail";
 import BoothSearchSuccess from "./pages/Search/BoothSearchSuccess";
 import "./index.css";
+import CompetDetail from "./pages/CompetDetail";
+
 function App() {
   return (
     <BrowserRouter>
       <div>
         <Routes>
+          <Route path="/CompetDetail" element={<CompetDetail />} />
           {/* <Route path="/" element={<Firstpage />} /> */}
           <Route path="/Battle" element={<Battle />} />
           <Route path="/Mappage1" element={<Mappage1 />} />
