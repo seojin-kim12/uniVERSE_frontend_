@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ const Container = styled.div`
   background-color: black;
   -ms-overflow-style: none;
   scrollbar-width: none;
-
+  align-items: center;
   /* 미디어 쿼리 적용 */
   /* pc화면에서 너비를 390로 고정합니다*/
   @media (hover: hover) {
@@ -24,14 +24,78 @@ const Container = styled.div`
   }
 `;
 const BodyWrapper = styled.div`
-  min-height: calc(100vh - 151px); //푸터 공간 확보
+  min-height: calc(100vh - 150px); //푸터 공간 확보
 `;
 
-const Body = styled.div``;
+const Body = styled.div`
+  align-items: center;
+  height: 100%;
+  padding: 0 5.5%;
+`;
+const Topbar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 12px;
+`;
+const Back = styled.div`
+  cursor: pointer;
+  position: absolute;
+  left: 27px;
+`;
+const Toptitle = styled.div`
+  color: #fff;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-bottom: 5px;
+`;
+const Map = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  margin-top: 60px;
+  padding-bottom: 30%;
+`;
+const Mapframe = styled.div`
+  position: absolute;
+  margin-top: -29px;
+`;
+const Boothdetail_button = styled.div`
+  position: relative;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* 수직 중앙 정렬 */
+  cursor: pointer;
+  padding-bottom: 40%;
+`;
+
+const Boothdetail_ment = styled.div`
+  position: absolute;
+  color: #4fdfff;
+  font-family: SUIT;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  top: 50%; /* 부스 버튼의 중앙에서 위로 50% 이동 */
+  transform: translateY(-50%); /* 위로 이동해서 수직 중앙 정렬 */
+  padding-bottom: 40%;
+`;
 
 const Footer = styled.div`
   height: 150px;
   position: relative;
+  border: none;
+  margin: 0;
 `;
 const Left = styled.div`
   position: absolute;
@@ -87,11 +151,55 @@ const Right = styled.div`
   top: -3px;
 `;
 
-const Firstpage = () => {
+const Mappage1 = () => {
+  const navigate = useNavigate();
+  const goDeatil = () => {
+    navigate("/BoothSearch");
+  };
   return (
     <Container>
       <BodyWrapper>
-        <Body>{/* 내용 */}dfdffdsf</Body>
+        <Body>
+          <Topbar>
+            <Back>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/back.png`}
+                width="24px"
+                height="24px"
+                onClick={() => navigate(-1)}
+              />
+            </Back>
+            <Toptitle>부스 배치도</Toptitle>
+          </Topbar>
+          <Map>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
+              width="280px"
+              height="280px"
+              alt="map"
+            />
+            <Mapframe>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
+                width="337px"
+                height="338.5px"
+                alt="map"
+              />
+            </Mapframe>
+          </Map>
+          <Boothdetail_button>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
+              width="337px"
+              height="62px"
+              alt="boothdetail_button"
+              onClick={goDeatil}
+            />
+            <Boothdetail_ment onClick={goDeatil}>
+              부스 보러가기
+            </Boothdetail_ment>
+          </Boothdetail_button>
+        </Body>
       </BodyWrapper>
       <Footer>
         <Left>
@@ -150,4 +258,4 @@ const Firstpage = () => {
     </Container>
   );
 };
-export default Firstpage;
+export default Mappage1;
