@@ -314,7 +314,7 @@ const Battle = () => {
   };
 
   const checkRanking = () => {
-    navigate(`/Ranking`);
+    navigate(`/CompetDetail`);
   };
 
   return (
