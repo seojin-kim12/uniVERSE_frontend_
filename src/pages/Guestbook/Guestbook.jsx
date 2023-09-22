@@ -123,8 +123,10 @@ const CommentInput = styled.textarea`
 
   width: 250px;
   height: 40px;
+
   margin-top: -56px;
   margin-left: 35px;
+
   resize: none;
 
   &::placeholder {
