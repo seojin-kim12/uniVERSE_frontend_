@@ -232,7 +232,7 @@ const CompetDetail = () => {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(`/`); // 임시 설정
+    navigate(-1); // 임시 설정
   };
 
   return (
