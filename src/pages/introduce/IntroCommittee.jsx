@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -25,27 +26,28 @@ const Container = styled.div`
     display: none;
   }
 `;
-
+// 상단
 const TopContainer = styled.div`
+  margin-top: 6px;
   /*기본스타일*/
-  margin: 0px auto;
   width: 100%;
-  height: 80px;
+  height: 60px;
 `;
 const GoBack = styled.img`
-  width: 7%;
-  margin-left: -84%;
-  margin-top: 5%;
+  position: relative;
+  width: 25px;
+  top: 10px;
+  left: -37%;
 `;
-const TopText = styled.div`
+const TopText = styled.span`
+design: flex
+  margin: 0px auto;
   width: 60px;
   height: 40px;
-  margin-left: 43%;
-  margin-top: -9%;
-
+  top: 2px;
   color: #fff;
   font-family: SUIT;
-  font-size: 26px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
@@ -56,76 +58,28 @@ const BodyWrapper = styled.div`
   padding-top: 18px;
 `;
 
-const Img = styled.img``;
-const ImgPost = styled.div`
+const TopIndex = styled.div`
   position: absolute;
-  margin: 0px auto;
-  top: 28%;
-  margin-left: -20px;
-`;
-const BodyTop1 = styled.div`
-  position: absolute;
-  margin: 0px auto;
+  margin-left: 3%;
+  left: -2.8%;
+  width: 100%;
+  height: 40px;
   display: flex;
 
-  width: 100%;
-  height: 28px;
-  margin-top: -0.6%;
-
-  /*아이폰SE 기준*/
-  @media (max-width: 376px) {
-    margin-top: -1%;
-  }
-`;
-
-const P1 = styled.p`
-  position: absolute;
-  top: -33%;
-  left: 7%;
-  width: 55px;
-
   color: #0a0047;
   font-family: SUIT;
   font-size: 13px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
   line-height: normal;
-  text-shadow: 0.3px 0.1px 0 #0a0047;
-
-  @media (max-width: 376px) {
-    left: 6.6%;
-  }
 `;
-
-const P2 = styled.p`
-  position: absolute;
-  top: -33%;
-  left: 67.8%;
-  width: 70px;
-
-  color: #0a0047;
-  font-family: SUIT;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-
-  text-shadow: 0.3px 0.1px 0 #0a0047;
-
-  @media (max-width: 376px) {
-    left: 67.5%;
-  }
+const Index1 = styled.span`
+  flex: 0.8;
+  padding: 4px;
 `;
-
-const Body = styled.div`
-  width: 90%;
-  margin: 0px auto;
-`;
-const BodyMainTitle = styled.div`
-  position: absolute;
-  margin: 0px auto;
-  left: 45%;
-  top: 8.6%;
+const Index2 = styled.span`
+  flex: 0.6;
+  padding: 4px;
 
   color: #f5e889;
   font-family: SUIT;
@@ -133,93 +87,69 @@ const BodyMainTitle = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+
+  text-shadow: 0.3px 0.3px 0px #0a0047;
 `;
-
-const BodyNameCode = styled.div`
-  position: absolute;
-
-  top: 14.3%;
-  left: 13.3%;
+const Index3 = styled.span`
+  flex: 0.8;
+  padding: 3px;
+  text-shadow: 0.3px 0.3px 0px #0a0047;
+`;
+const NameCode = styled.div`
   color: #fff;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: SUIT;
-  font-size: 20px;
+  font-size: 18.5px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 `;
 
-const BodyInstagram = styled.div`
+const InstagramBox = styled.div`
   position: absolute;
-  margin: 0px auto;
-  display: flex;
-  top: 21.3%;
+  left: 11%;
 
-  padding: 2%;
-  padding-left: 35%;
+  top: 17.6%;
   width: 100%;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 21%;
-    padding-left: 33.2%;
-  }
+  height: 20px;
+`;
+const TopBox = styled.div`
+  position: absolute;
+  text-align: center;
+  top: 16.4%;
+  left: 3%;
+  width: 94%;
+  height: 21.6%;
 `;
 
-const BodyContent = styled.div`
+const ContentBox = styled.div`
   position: absolute;
-  margin: 0px auto;
-  top: 54%;
-  left: 3.3%;
-  padding-top: 5%;
-  width: 93%;
-  height: 23%;
+  top: 61.9%;
+  left: 6.2%;
+  width: 87%;
+  height: 30%;
 
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 54%;
-  }
+  color: #fff;
+  font-family: SUIT;
+  font-size: 10.3px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
 `;
 
 const C1 = styled.span`
   color: #f5e889;
   text-align: center;
   font-family: SUIT;
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 12px;
-  }
 `;
-const C2 = styled.span`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
+const C2 = styled.span``;
+const C3 = styled.p``;
 
-  @media (max-width: 376px) {
-    font-size: 10.3px;
-  }
-`;
-const C3 = styled.p`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
-
-  @media (max-width: 376px) {
-    font-size: 10.3px;
-  }
-`;
-
+//하단
 const Footer = styled.div`
   margin-top: 20px;
   height: 150px;
@@ -325,53 +255,44 @@ const IntroCommittee = () => {
       </TopContainer>
 
       <BodyWrapper>
-        <Body>
-          <BodyTop1>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-first.png`}
-              width="29%"
-              height="26px"
-              style={imageStyle}
-              alt="body-top-middle"
-              onClick={GoFestival}
-            />
-            <P1 onClick={GoFestival}>축제</P1>
+        <div style={{ margin: "0px auto", position: "relative" }}>
+          <TopIndex>
+            <Index1 onClick={GoFestival}>축제</Index1>
+            <Index2>축.운.위</Index2>
+            <Index3 onClick={GoLion}>멋사 11기</Index3>
+          </TopIndex>
 
-            <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-end.png`}
-              width="29%"
-              height="26px"
-              alt="body-top-end"
-              onClick={GoLion}
-            />
-            <P2 onClick={GoLion}>멋사 11기</P2>
-          </BodyTop1>
-          <BodyMainTitle>축.운.위</BodyMainTitle>
+          <NameCode
+            style={{
+              top: "7.7%", //absolute 쓸거면 top은 %로
+              position: "absolute",
+              left: "14%",
+              // transform: "translateX(-30%)",
+            }}
+          >
+            동덕여자대학교 축제운영위원회
+          </NameCode>
 
-          <BodyNameCode>동덕여자대학교 축제운영위원회</BodyNameCode>
-          <BodyInstagram>
+          <InstagramBox>
             <span style={instagramText}>instagram</span>
             <a
-              href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
               style={linkStyle}
+              href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
+              target="_blank"
             >
               @ddwu.festival2023
             </a>
-          </BodyInstagram>
+          </InstagramBox>
 
-          <ImgPost>
+          <TopBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/CommitLogo.png`}
-              width="70%"
+              src={`${process.env.PUBLIC_URL}/images/intro-images/CommitteeImage/CommitLogo.png`}
+              width="73%"
+              style={{ marginTop: "22%" }}
             />
-          </ImgPost>
-          <Img
-            src={`${process.env.PUBLIC_URL}/images/intro-images/Frame-committee.png`}
-            width="100%"
-            alt="body-top-first"
-          />
+          </TopBox>
 
-          <BodyContent>
+          <ContentBox>
             <C1>축제운영위원회</C1>
             <C2>는</C2>
             <C3>
@@ -409,8 +330,13 @@ const IntroCommittee = () => {
               <br /> 생생하게 담긴 VLOG 영상도 공개 예정이니 많은 관심
               부탁드립니다!
             </C3>
-          </BodyContent>
-        </Body>
+          </ContentBox>
+
+          <img
+            src={`${process.env.PUBLIC_URL}/images/intro-images/FrameCommittee.png`}
+            style={{ maxWidth: "88%", height: "auto" }}
+          />
+        </div>
       </BodyWrapper>
 
       <Footer>

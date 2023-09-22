@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -25,35 +26,31 @@ const Container = styled.div`
     display: none;
   }
 `;
-
+// 상단
 const TopContainer = styled.div`
+  margin-top: 6px;
   /*기본스타일*/
-  margin: 0px auto;
   width: 100%;
-  height: 80px;
+  height: 60px;
 `;
 const GoBack = styled.img`
-  width: 7%;
-  margin-left: -84%;
-  margin-top: 5%;
+  position: relative;
+  width: 25px;
+  top: 10px;
+  left: -37%;
 `;
-const TopText = styled.div`
+const TopText = styled.span`
+design: flex
+  margin: 0px auto;
   width: 60px;
   height: 40px;
-  margin-left: 43%;
-  margin-top: -9%;
-
+  top: 2px;
   color: #fff;
   font-family: SUIT;
-  font-size: 26px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 900;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 22px;
-  }
 `;
 
 const BodyWrapper = styled.div`
@@ -61,64 +58,24 @@ const BodyWrapper = styled.div`
   padding-top: 18px;
 `;
 
-const Img = styled.img``;
-const ImgPost = styled.div`
-  margin: 0px auto;
+const TopIndex = styled.div`
   position: absolute;
-  margin-left: -4.4%;
-  top: 25.3%;
-`;
-const BodyTop1 = styled.div`
-  position: absolute;
+  margin-left: 3%;
+  left: -2.8%;
+  width: 100%;
+  height: 40px;
   display: flex;
-  margin: 0px auto;
-  padding-left: 33%;
-  padding-right: 5%;
-  margin-top: -0.6%;
-`;
-
-const P1 = styled.p`
-  position: absolute;
-  top: -33%;
-  left: 41%;
-  width: 55px;
 
   color: #0a0047;
   font-family: SUIT;
   font-size: 13px;
   font-style: normal;
-  font-weight: 900;
+  font-weight: 700;
   line-height: normal;
-  text-shadow: 0.3px 0.1px 0 #0a0047;
 `;
-
-const P2 = styled.p`
-  position: absolute;
-  top: -33%;
-  left: 73%;
-  width: 70px;
-
-  color: #0a0047;
-  font-family: SUIT;
-  font-size: 13px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: normal;
-
-  text-shadow: 0.3px 0.1px 0 #0a0047;
-`;
-
-const Body = styled.div`
-  margin: 0px auto;
-  width: 90%;
-  margin: 0px auto;
-`;
-const BodyMainTitle = styled.div`
-  position: absolute;
-
-  margin-left: 9.7%;
-  margin-top: 1.5%;
-
+const Index1 = styled.span`
+  flex: 0.8;
+  padding: 4px;
   color: #f5e889;
   font-family: SUIT;
   font-size: 13px;
@@ -126,13 +83,18 @@ const BodyMainTitle = styled.div`
   font-weight: 700;
   line-height: normal;
 `;
+const Index2 = styled.span`
+  flex: 0.6;
+  padding: 4px;
 
-const BodyNameCode = styled.div`
-  position: absolute;
-  margin: 0px auto;
-
-  top: 14.3%;
-  left: 16%;
+  text-shadow: 0.3px 0.3px 0px #0a0047;
+`;
+const Index3 = styled.span`
+  flex: 0.8;
+  padding: 3px;
+  text-shadow: 0.3px 0.3px 0px #0a0047;
+`;
+const NameCode = styled.div`
   color: #fff;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   font-family: SUIT;
@@ -140,47 +102,41 @@ const BodyNameCode = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 19px;
-    top: 13.9%;
-  }
 `;
 
-const BodyInstagram = styled.div`
+const InstagramBox = styled.div`
   position: absolute;
-  margin: 0px auto;
-  display: flex;
-  top: 21.3%;
+  left: 11%;
 
-  padding: 2%;
-  padding-left: 35%;
+  top: 17.6%;
   width: 100%;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 21%;
-    padding-left: 33.2%;
-  }
+  height: 20px;
 `;
-
-const BodyContent = styled.div`
+const TopBox = styled.div`
   position: absolute;
-  margin: 0px auto;
-  top: 60%;
-  left: 3.3%;
-  padding-top: 5%;
-  width: 93%;
-  height: 23%;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    top: 58.8%;
-  }
+  text-align: center;
+  top: 16.4%;
+  left: 3%;
+  width: 94%;
+  height: 21.6%;
 `;
 
-const C1 = styled.p`
+const ContentBox = styled.div`
+  position: absolute;
+  top: 66.9%;
+  left: 8.4%;
+  width: 83%;
+  height: 30%;
+
+  color: #fff;
+  font-family: SUIT;
+  font-size: 10.3px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const P1 = styled.p`
   color: #f5e889;
   text-align: center;
   font-family: SUIT;
@@ -188,37 +144,19 @@ const C1 = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  /*아이폰SE 이하 기준*/
-  @media (max-width: 376px) {
-    font-size: 13px;
-  }
 `;
-const C2 = styled.p`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 11px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: normal;
 
-  @media (max-width: 376px) {
-    font-size: 10.5px;
-  }
-`;
-const C3 = styled.p`
+const P2 = styled.p`
   color: #f5e889;
+  text-align: center;
   font-family: SUIT;
   font-size: 12px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
-  @media (max-width: 376px) {
-    font-size: 12px;
-  }
 `;
 
+//하단
 const Footer = styled.div`
   margin-top: 20px;
   height: 150px;
@@ -282,17 +220,19 @@ const IntroFestival = () => {
   const navigate = useNavigate();
 
   const GoCommittee = () => {
-    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
     navigate("/Committee");
   };
   const GoLion = () => {
-    // 버튼을 클릭할 때 페이지 이동을 수행합니다.
     navigate("/");
   };
 
-  const imageStyle = {
-    marginRight: "13px",
-    marginLeft: "10px;",
+  const TextStrongStyle = {
+    color: "#F5E889",
+    fontFamily: "SUIT",
+    fontSize: "11px",
+    fontStyle: "normal",
+    fontWeight: "700",
+    lineHeight: "normal",
   };
 
   const instagramText = {
@@ -324,81 +264,76 @@ const IntroFestival = () => {
       </TopContainer>
 
       <BodyWrapper>
-        <Body>
-          <BodyTop1>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-middle.png`}
-              width="47%"
-              height="26px"
-              style={imageStyle}
-              alt="body-top-middle"
-              onClick={GoCommittee}
-            />
-            <P1 onClick={GoCommittee}>축.운.위</P1>
+        <div style={{ margin: "0px auto", position: "relative" }}>
+          <TopIndex>
+            <Index1>축제</Index1>
+            <Index2 onClick={GoCommittee}>축.운.위</Index2>
+            <Index3 onClick={GoLion}>멋사 11기</Index3>
+          </TopIndex>
 
-            <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/Rectangle-end.png`}
-              width="47%"
-              height="26px"
-              style={imageStyle}
-              alt="body-top-end"
-              onClick={GoLion}
-            />
-            <P2 onClick={GoLion}>멋사 11기</P2>
-          </BodyTop1>
-          <BodyMainTitle>축제</BodyMainTitle>
+          <NameCode
+            style={{
+              top: "7.7%", //absolute 쓸거면 top은 %로
+              position: "absolute",
+              left: "18%",
+              // transform: "translateX(-30%)",
+            }}
+          >
+            동덕 uniVERSE
+          </NameCode>
 
-          <BodyNameCode>동덕 uniVERSE</BodyNameCode>
-          <BodyInstagram>
+          <InstagramBox>
             <span style={instagramText}>instagram</span>
             <a
-              href="https://www.instagram.com/ddwu.festival2023/?igshid=MzRlODBiNWFlZA%3D%3D"
               style={linkStyle}
+              href="https://instagram.com/ddwu.festival2023?igshid=MzRlODBiNWFlZA=="
             >
               @ddwu.festival2023
             </a>
-          </BodyInstagram>
+          </InstagramBox>
 
-          <ImgPost>
+          <TopBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/post.png`}
-              width="70%"
+              src={`${process.env.PUBLIC_URL}/images/intro-images/FestivalImage/post.png`}
+              width="73%"
+              style={{ marginTop: "13%" }}
             />
-          </ImgPost>
-          <Img
-            src={`${process.env.PUBLIC_URL}/images/intro-images/Frame-festival.png`}
-            width="100%"
-            alt="body-top-first"
-          />
+          </TopBox>
 
-          <BodyContent>
-            <C1>“메이데이, 메이데이. 들리면 응답 바란다.”</C1>
-            <C2>
+          <ContentBox>
+            <P1>“메이데이, 메이데이. 들리면 응답 바란다.”</P1>
+            <p>
+              {" "}
               잠을 깨우는 낯선 이의 무전 소리.
               <br />
               다급한 목소리에 두 눈을 떠보니 보이는 건,
-              <br />
-              어딘가 묘한 기시감을 풍기는 학교의 모습이었다.
+              <br /> 어딘가 묘한 기시감을 풍기는 학교의 모습이었다.
               <br /> 똑같은 학교의 건물들과 풍경. 하지만 이유모를 낯선 이 느낌.
-              <br /> 분명, 우리 학교이지만 낯선 이 곳. 
+              <br /> 분명, 우리 학교이지만 낯선 이 곳.
               <br /> 혹시 영화 속에서만 보던 또 다른 시공간인 멀티버스는
               아닐까…?
-            </C2>
-            <C3>
+            </p>
+            <P2>
               그 순간, 밤이 찾아오고 이전엔 볼 수 없었던
-              <br /> 화려한 우주 사이로 빨려 들어가게 되는데…!
-            </C3>
-            <C2>
+              <br /> 화려한 우주 사이로 빨려 들어가게 되는데…!{" "}
+            </P2>
+            <p>
               우리가 만난다는 것은 너의 우주와 나의 우주가 맞닿아 있음을 뜻한다.
               <br />
               우리는 얼마나 많은 우주들을 공유하고 확장하며 살아가고 있는가.
-            </C2>
-            <C3>
-              우주, 만남, 확장, 또다른 세상(멀티버스) UNIVERSE,
-              <br /> ENCOUNTER, EXPANSION, MULTIVERSE
-            </C3>
-          </BodyContent>
-        </Body>
+            </p>
+            <P2>
+              우주, 만남, 확장, 또다른 세상(멀티버스)
+              <br />
+              UNIVERSE, ENCOUNTER, EXPANSION, MULTIVERSE
+            </P2>
+          </ContentBox>
+
+          <img
+            src={`${process.env.PUBLIC_URL}/images/intro-images/Frame-festival (2).png`}
+            style={{ maxWidth: "88%", height: "auto" }}
+          />
+        </div>
       </BodyWrapper>
 
       <Footer>

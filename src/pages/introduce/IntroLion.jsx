@@ -60,7 +60,7 @@ const BodyWrapper = styled.div`
 
 const TopIndex = styled.div`
   position: absolute;
-  top: 0.2%;
+  margin-left: 3%;
   left: -2.8%;
   width: 100%;
   height: 40px;
@@ -76,13 +76,14 @@ const TopIndex = styled.div`
 const Index1 = styled.span`
   flex: 0.6;
   padding: 4px;
-  margin-right: 16%;
+
   text-shadow: 0.3px 0.3px 0px #0a0047;
 `;
 const Index2 = styled.span`
-  flex: 0.6;
+  flex: 0.5;
   padding: 4px;
-  margin-right: 18%;
+  width: 30px;
+
   text-shadow: 0.3px 0.3px 0px #0a0047;
 `;
 const Index3 = styled.span`
@@ -281,8 +282,8 @@ const IntroLion = () => {
       <BodyWrapper>
         <div style={{ margin: "0px auto", position: "relative" }}>
           <TopIndex>
-            <Index1>축제</Index1>
-            <Index2>축.운.위</Index2>
+            <Index1 onClick={GoFestival}>축제</Index1>
+            <Index2 onClick={GoCommittee}>축.운.위</Index2>
             <Index3>멋사 11기</Index3>
           </TopIndex>
 
@@ -302,6 +303,7 @@ const IntroLion = () => {
             <a
               style={linkStyle}
               href="https://instagram.com/dongduk_likelion?igshid=MzRlODBiNWFlZA=="
+              target="_blank"
             >
               @dongduk_likelion
             </a>
