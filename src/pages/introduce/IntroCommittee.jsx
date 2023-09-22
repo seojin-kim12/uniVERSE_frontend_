@@ -286,7 +286,7 @@ const IntroCommittee = () => {
 
           <TopBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/CommitteeImage/CommitLogo.png`}
+              src={`${process.env.PUBLIC_URL}/images/CommitLogo.png`}
               width="73%"
               style={{ marginTop: "22%" }}
             />
@@ -333,7 +333,7 @@ const IntroCommittee = () => {
           </ContentBox>
 
           <img
-            src={`${process.env.PUBLIC_URL}/images/intro-images/FrameCommittee.png`}
+            src={`${process.env.PUBLIC_URL}/images/FrameCommittee.png`}
             style={{ maxWidth: "88%", height: "auto" }}
           />
         </div>

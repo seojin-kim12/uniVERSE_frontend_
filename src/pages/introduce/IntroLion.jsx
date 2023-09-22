@@ -312,17 +312,17 @@ const IntroLion = () => {
           <TopBox>
             <LogoBox>
               <img
-                src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/lionLogo.png`}
+                src={`${process.env.PUBLIC_URL}/images/lionLogo.png`}
                 width="44%"
                 style={{ marginRight: "2%" }}
               />
               <img
-                src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/dongLogo.png`}
+                src={`${process.env.PUBLIC_URL}/images/dongLogo.png`}
                 width="9%"
               />
             </LogoBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/we.png`}
+              src={`${process.env.PUBLIC_URL}/images/we.png`}
               width="73%"
               style={{ marginTop: "13%" }}
             />
@@ -343,25 +343,25 @@ const IntroLion = () => {
 
           <FrontBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/Front.png`}
+              src={`${process.env.PUBLIC_URL}/images/Front.png`}
               width="57%"
             />
           </FrontBox>
           <BackBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/Back.png`}
+              src={`${process.env.PUBLIC_URL}/images/Back.png`}
               width="44%"
             />
           </BackBox>
           <DesignBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/LionImage/Design.png`}
+              src={`${process.env.PUBLIC_URL}/images/Design.png`}
               width="44%"
             />
           </DesignBox>
 
           <img
-            src={`${process.env.PUBLIC_URL}/images/intro-images/FrameLion.png`}
+            src={`${process.env.PUBLIC_URL}/images/FrameLion.png`}
             style={{ maxWidth: "88%", height: "auto" }}
           />
         </div>

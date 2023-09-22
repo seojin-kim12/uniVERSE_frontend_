@@ -294,7 +294,7 @@ const IntroFestival = () => {
 
           <TopBox>
             <img
-              src={`${process.env.PUBLIC_URL}/images/intro-images/FestivalImage/post.png`}
+              src={`${process.env.PUBLIC_URL}/images/post.png`}
               width="73%"
               style={{ marginTop: "13%" }}
             />
@@ -330,7 +330,7 @@ const IntroFestival = () => {
           </ContentBox>
 
           <img
-            src={`${process.env.PUBLIC_URL}/images/intro-images/Frame-festival (2).png`}
+            src={`${process.env.PUBLIC_URL}/images/Frame-festival (2).png`}
             style={{ maxWidth: "88%", height: "auto" }}
           />
         </div>
