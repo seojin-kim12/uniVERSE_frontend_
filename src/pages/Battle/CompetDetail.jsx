@@ -271,14 +271,6 @@ const CompetDetail = () => {
       <Container>
         <BodyWrapper>
           <Body>
-            {/* 테스트
-            <div>
-              {postList.map((e) => (
-                <div>
-                  {e.college} {e.participationRate}% {e.rank}등
-                </div>
-              ))}
-            </div> */}
             <Box>
               <BackBtn onClick={goBack}>
                 <img
