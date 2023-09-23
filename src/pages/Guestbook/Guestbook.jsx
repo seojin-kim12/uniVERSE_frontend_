@@ -141,10 +141,17 @@ const CommentInput = styled.textarea`
 
   width: 250px;
   height: 40px;
+<<<<<<< HEAD
+
+  margin-top: -56px;
+  margin-left: 35px;
+
+=======
   //56
   margin-top: -53px;
   margin-left: -50px;
   margin-bottom: 30px;
+>>>>>>> 752b4a204d9d857c261ce2e9a3ba23943067df4d
   resize: none;
 
   &::placeholder {
