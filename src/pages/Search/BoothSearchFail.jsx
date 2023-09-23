@@ -219,7 +219,7 @@ const BoothSearchFail = () => {
           <Topbar>
             <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/back.png`}
+                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                 width="24px"
                 height="24px"
                 onClick={() => navigateToBack()}

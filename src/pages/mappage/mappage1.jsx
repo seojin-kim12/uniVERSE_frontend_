@@ -3,26 +3,24 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-  text-align: center;
-  background-color: black;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  align-items: center;
-  /* 미디어 쿼리 적용 */
-  /* pc화면에서 너비를 390로 고정합니다*/
-  @media (hover: hover) {
-    width: 390px;
-    margin: 0 auto;
-  }
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+position: relative;
+text-align: center;\
+background-color: #000204;
 
-  /* 스크롤바 숨기기 */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+/* 미디어 쿼리 적용 */
+/* pc화면에서 너비를 390로 고정합니다*/
+@media (hover: hover) {
+  width: 390px;
+  margin: 0 auto;
+}
+
+/* 스크롤바 숨기기 */
+&::-webkit-scrollbar {
+  display: none;
+}
 `;
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 150px); //푸터 공간 확보
@@ -30,11 +28,15 @@ const BodyWrapper = styled.div`
 
 const Body = styled.div`
   align-items: center;
+  height: 100%;
+  padding: 0 5.5%;
 `;
 const Topbar = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 86px;
+  height: 70px;
+  margin-bottom: 5px;
+  box-sizing: border-box;
   align-items: center;
   padding-left: 12px;
 `;
@@ -43,98 +45,56 @@ const Back = styled.div`
   position: absolute;
   left: 27px;
 `;
-const Boothimg = styled.div`
-  margin: auto 0;
-  padding-bottom: 20px;
+const Toptitle = styled.div`
+  color: #fff;
+  cursor: pointer;
+  margin: auto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  padding-bottom: 5px;
 `;
-const Boothinfo = styled.div`
-  margin-left: -0px;
+const Map = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Center vertically */
+  align-items: center; /* Center horizontally */
+  margin-top: 60px;
+  padding-bottom: 30%;
 `;
-const Boothname = styled.div`
-  width: 330px;
-  height: 34.614px;
-  flex-shrink: 0;
+const Mapframe = styled.div`
+  position: absolute;
+  margin-top: -29px;
+`;
+const Boothdetail_button = styled.div`
+  position: relative;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column; /* 수직 중앙 정렬 */
+  cursor: pointer;
+  padding-bottom: 40%;
+`;
+
+const Boothdetail_ment = styled.div`
+  position: absolute;
   color: #4fdfff;
   font-family: SUIT;
-  font-size: 27.089px;
+  font-size: 15px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  padding-bottom: 15px;
-  text-align: left;
+  top: 50%; /* 부스 버튼의 중앙에서 위로 50% 이동 */
+  transform: translateY(-50%); /* 위로 이동해서 수직 중앙 정렬 */
+  padding-bottom: 40%;
 `;
 
-const Intro = styled.div`
-  width: 330px;
-  height: 100px;
-  flex-shrink: 0;
-  color: #fff;
-  font-family: SUIT;
-  font-size: 18.059px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-align: left;
-`;
-const Detail_detail = styled.div`
-  margin-left: 10px;
-  margin-top: 10px;
-`;
-const Time = styled.div`
-  width: 310px;
-  height: 34.614px;
-  flex-shrink: 0;
-  color: #fff;
-  font-family: SUIT;
-  font-size: 18.059px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-align: left;
-  display: flex;
-`;
-const Time_detail = styled.div`
-  width: 210px;
-  height: 22px;
-  flex-shrink: 0;
-  color: #4fdfff;
-  font-family: SUIT;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-left: 10px;
-  margin-top: -2px;
-`;
-const Place = styled.div`
-  width: 310px;
-  height: 34.614px;
-  flex-shrink: 0;
-  color: #fff;
-  font-family: SUIT;
-  font-size: 18.059px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-align: left;
-  display: flex;
-`;
-const Place_detail = styled.div`
-  width: 310px;
-  height: 34px;
-  flex-shrink: 0;
-  color: #4fdfff;
-  font-family: SUIT;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  margin-left: 10px;
-  margin-top: -2px;
-`;
 const Footer = styled.div`
   height: 150px;
   position: relative;
+  border: none;
+  margin: 0;
 `;
 const Left = styled.div`
   position: absolute;
@@ -190,12 +150,11 @@ const Right = styled.div`
   top: -3px;
 `;
 
-const Mappage3 = () => {
+const Mappage1 = () => {
   const navigate = useNavigate();
-  const navigateToBack = () => {
-    navigate(-1);
+  const goDeatil = () => {
+    navigate("/BoothSearch");
   };
-
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
@@ -209,45 +168,42 @@ const Mappage3 = () => {
             <Topbar>
               <Back>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/back.png`}
+                  src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                   width="24px"
                   height="24px"
-                  onClick={() => navigateToBack()}
+                  onClick={() => navigate(-1)}
                 />
               </Back>
+              <Toptitle>부스 배치도</Toptitle>
             </Topbar>
-            <Boothimg>
+            <Map>
               <img
-                src={`${process.env.PUBLIC_URL}/images/boothimg_temp.png`}
-                width="320px"
-                height="320px"
-                alt="boothimg"
+                src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
+                width="280px"
+                height="280px"
+                alt="map"
               />
-            </Boothimg>
-            <Boothinfo>
-              <Boothname>부스 이름</Boothname>
-              <Intro>한줄소개</Intro>
-              <Detail_detail>
-                <Time>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
-                    width="14px"
-                    height="17px"
-                    alt="timeicon"
-                  />
-                  <Time_detail>1232154678</Time_detail>
-                </Time>
-                <Place>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
-                    width="13.993px"
-                    height="17px"
-                    alt="placeicon"
-                  />
-                  <Place_detail>숭인관에서 함</Place_detail>
-                </Place>
-              </Detail_detail>
-            </Boothinfo>
+              <Mapframe>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
+                  width="337px"
+                  height="338.5px"
+                  alt="map"
+                />
+              </Mapframe>
+            </Map>
+            <Boothdetail_button>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
+                width="337px"
+                height="62px"
+                alt="boothdetail_button"
+                onClick={goDeatil}
+              />
+              <Boothdetail_ment onClick={goDeatil}>
+                부스 보러가기
+              </Boothdetail_ment>
+            </Boothdetail_button>
           </Body>
         </BodyWrapper>
         <Footer>
@@ -308,4 +264,4 @@ const Mappage3 = () => {
     </motion.div>
   );
 };
-export default Mappage3;
+export default Mappage1;

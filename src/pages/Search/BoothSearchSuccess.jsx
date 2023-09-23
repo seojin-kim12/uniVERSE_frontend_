@@ -152,6 +152,8 @@ const BoothPic = styled.div`
   width: 91px;
   height: 91px;
   display: inline-block;
+  border-radius: 14px;
+  border: 1px solid #4fdfff;
 `;
 const BoothContent = styled.div`
   display: inline-block;
@@ -280,7 +282,7 @@ const BoothSearchSuccess = () => {
           <Topbar>
             <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/back.png`}
+                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                 width="24px"
                 height="24px"
                 onClick={() => navigateToBack()}
