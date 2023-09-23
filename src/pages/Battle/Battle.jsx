@@ -277,7 +277,7 @@ const Battle = () => {
       <TopBar>
         <Back onClick={onClickBtn}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/back.png`}
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
             alt="back"
             width="24px"
           />

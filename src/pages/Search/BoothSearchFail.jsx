@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
+import { motion } from "framer-motion";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -208,118 +208,125 @@ const BoothSearchFail = () => {
   });
 
   return (
-    <Container>
-      <BodyWrapper>
-        <Topbar>
-          <Back>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/back.png`}
-              width="24px"
-              height="24px"
-              onClick={() => navigateToBack()}
-            />
-          </Back>
-          <Toptitle>부스 배치도</Toptitle>
-        </Topbar>
-        <Body>
-          <SearchWrapper>
-            <Search placeholder="부스 이름을 검색하세요." />
-            <SearchButton>
+    // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <BodyWrapper>
+          <Topbar>
+            <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/search-button.png`}
-                width="17px"
-                height="17px"
+                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                width="24px"
+                height="24px"
+                onClick={() => navigateToBack()}
               />
-            </SearchButton>
-          </SearchWrapper>
-          <ContentWrapper>
-            <DateWrapper>
-              <Four
-                style={getBorderStyle("four")}
-                onClick={() => handleElementClick("four")}
-              >
-                04/WED
-              </Four>
-              <Five
-                style={getBorderStyle("five")}
-                onClick={() => handleElementClick("five")}
-              >
-                05/THU
-              </Five>
-              <Six
-                style={getBorderStyle("six")}
-                onClick={() => handleElementClick("six")}
-              >
-                06/FRI
-              </Six>
-            </DateWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="100%"
-                height="1px"
-                alt="footer"
-              />
-            </Line>
-            <ContentBox>검색 결과가 없습니다.</ContentBox>
-          </ContentWrapper>
-        </Body>
-      </BodyWrapper>
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
+            </Back>
+            <Toptitle>부스 배치도</Toptitle>
+          </Topbar>
+          <Body>
+            <SearchWrapper>
+              <Search placeholder="부스 이름을 검색하세요." />
+              <SearchButton>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/search-button.png`}
+                  width="17px"
+                  height="17px"
+                />
+              </SearchButton>
+            </SearchWrapper>
+            <ContentWrapper>
+              <DateWrapper>
+                <Four
+                  style={getBorderStyle("four")}
+                  onClick={() => handleElementClick("four")}
+                >
+                  04/WED
+                </Four>
+                <Five
+                  style={getBorderStyle("five")}
+                  onClick={() => handleElementClick("five")}
+                >
+                  05/THU
+                </Five>
+                <Six
+                  style={getBorderStyle("six")}
+                  onClick={() => handleElementClick("six")}
+                >
+                  09/FRI
+                </Six>
+              </DateWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="100%"
+                  height="1px"
+                  alt="footer"
+                />
+              </Line>
+              <ContentBox>검색 결과가 없습니다.</ContentBox>
+            </ContentWrapper>
+          </Body>
+        </BodyWrapper>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default BoothSearchFail;
