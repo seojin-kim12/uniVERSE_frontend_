@@ -223,7 +223,7 @@ const IntroFestival = () => {
     navigate("/Committee");
   };
   const GoLion = () => {
-    navigate("/");
+    navigate("/IntroLion");
   };
 
   const TextStrongStyle = {

@@ -1,27 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-  text-align: center;
-  background-color: black;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  align-items: center;
-  /* 미디어 쿼리 적용 */
-  /* pc화면에서 너비를 390로 고정합니다*/
-  @media (hover: hover) {
-    width: 390px;
-    margin: 0 auto;
-  }
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+position: relative;
+text-align: center;\
+background-color: #000204;
 
-  /* 스크롤바 숨기기 */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+/* 미디어 쿼리 적용 */
+/* pc화면에서 너비를 390로 고정합니다*/
+@media (hover: hover) {
+  width: 390px;
+  margin: 0 auto;
+}
+
+/* 스크롤바 숨기기 */
+&::-webkit-scrollbar {
+  display: none;
+}
 `;
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 150px); //푸터 공간 확보
@@ -157,105 +156,112 @@ const Mappage1 = () => {
     navigate("/BoothSearch");
   };
   return (
-    <Container>
-      <BodyWrapper>
-        <Body>
-          <Topbar>
-            <Back>
+    // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <BodyWrapper>
+          <Body>
+            <Topbar>
+              <Back>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                  width="24px"
+                  height="24px"
+                  onClick={() => navigate(-1)}
+                />
+              </Back>
+              <Toptitle>부스 배치도</Toptitle>
+            </Topbar>
+            <Map>
               <img
-                src={`${process.env.PUBLIC_URL}/images/back.png`}
-                width="24px"
-                height="24px"
-                onClick={() => navigate(-1)}
-              />
-            </Back>
-            <Toptitle>부스 배치도</Toptitle>
-          </Topbar>
-          <Map>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
-              width="280px"
-              height="280px"
-              alt="map"
-            />
-            <Mapframe>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
-                width="337px"
-                height="338.5px"
+                src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
+                width="280px"
+                height="280px"
                 alt="map"
               />
-            </Mapframe>
-          </Map>
-          <Boothdetail_button>
+              <Mapframe>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
+                  width="337px"
+                  height="338.5px"
+                  alt="map"
+                />
+              </Mapframe>
+            </Map>
+            <Boothdetail_button>
+              <img
+                src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
+                width="337px"
+                height="62px"
+                alt="boothdetail_button"
+                onClick={goDeatil}
+              />
+              <Boothdetail_ment onClick={goDeatil}>
+                부스 보러가기
+              </Boothdetail_ment>
+            </Boothdetail_button>
+          </Body>
+        </BodyWrapper>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
-              width="337px"
-              height="62px"
-              alt="boothdetail_button"
-              onClick={goDeatil}
-            />
-            <Boothdetail_ment onClick={goDeatil}>
-              부스 보러가기
-            </Boothdetail_ment>
-          </Boothdetail_button>
-        </Body>
-      </BodyWrapper>
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default Mappage1;

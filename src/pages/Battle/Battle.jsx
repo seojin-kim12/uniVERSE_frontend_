@@ -137,99 +137,6 @@ const TopTitle = styled.div`
   margin-top: -34px;
 `;
 
-const Rank = styled.div`
-  // width: 251.786px;
-  height: 420px;
-  position: relative;
-  margin: auto;
-  margin-top: 30px;
-`;
-
-const Ranking1 = styled.div`
-  margin-left: -13px;
-  position: relative;
-`;
-const Ranking2 = styled.div``;
-const Ranking3 = styled.div``;
-
-const R1 = styled.div`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 17.046px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  position: absolute;
-  margin-top: -83.5px;
-  margin-left: 50%; // 가운데 정렬을 위해 50% 위치로 이동
-  transform: translateX(-400%); // 가운데 정렬을 위한 가로 이동
-`;
-
-const R2 = styled.div`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 17.046px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  position: absolute;
-  margin-left: 50%; // 가운데 정렬을 위해 50% 위치로 이동
-  transform: translateX(-430%); // 가운데 정렬을 위한 가로 이동
-  margin-top: -84px;
-`;
-
-const N1 = styled.div`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 14.205px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  position: absolute;
-  margin-top: -81px;
-  margin-left: 50%; // 가운데 정렬을 위해 50% 위치로 이동
-  transform: translateX(-50%); // 가운데 정렬을 위한 가로 이동
-`;
-
-const N2 = styled.div`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 14.205px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  position: absolute;
-  margin-top: -81px;
-  margin-left: 50%; // 가운데 정렬을 위해 50% 위치로 이동
-  transform: translateX(-68%); // 가운데 정렬을 위한 가로 이동
-`;
-
-const Percent = styled.div`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 14.205px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  position: absolute;
-  margin-top: -81px;
-  margin-left: 50%; // 가운데 정렬을 위해 50% 위치로 이동
-  transform: translateX(400%); // 가운데 정렬을 위한 가로 이동
-`;
-
-const Percent2 = styled.div`
-  color: #fff;
-  font-family: SUIT;
-  font-size: 14.205px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  position: absolute;
-  margin-top: -81px;
-  margin-left: 50%; // 가운데 정렬을 위해 50% 위치로 이동
-  transform: translateX(378%); // 가운데 정렬을 위한 가로 이동
-`;
-
 const Check = styled.button`
   position: relative;
   padding: 14px 33px 13px 33px;
@@ -238,6 +145,7 @@ const Check = styled.button`
   border-radius: 10px;
   border: 1px solid #d1fff7;
   background: rgba(134, 228, 212, 0.25);
+  margin-top: 20px;
 
   color: #fff;
   font-family: SUIT;
@@ -254,7 +162,7 @@ const College = styled.select`
   background: #fff;
   width: 285px;
   height: 70px;
-  margin-top: 70px;
+  margin-top: 50px;
   outline: none;
   appearance: none;
   background: url("${process.env.PUBLIC_URL}/images/down-one.png") no-repeat
@@ -303,7 +211,54 @@ const Participation = styled.button`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  margin-bottom: 200px;
+  margin-bottom: 70px;
+`;
+
+const TopBox2 = styled.div`
+  position: relative;
+  margin: auto;
+  width: 350px;
+  margin-bottom: 5px;
+`;
+const ImgBox = styled.div`
+  position: relative;
+  left: -12.5px;
+`;
+const TopText = styled.div`
+  position: relative;
+  top: -98px;
+  left: -3px;
+`;
+
+const RankNum = styled.div`
+  position: absolute;
+  color: #fff;
+  margin-left: 42px;
+  font-family: SUIT;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+const RankUniv = styled.div`
+  position: absolute;
+  margin-left: 140px;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+const RankPercent = styled.div`
+  position: absolute;
+  margin-left: 280px;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;
 
 const Battle = () => {
@@ -322,7 +277,7 @@ const Battle = () => {
       <TopBar>
         <Back onClick={onClickBtn}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/back.png`}
+            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
             alt="back"
             width="24px"
           />
@@ -341,7 +296,7 @@ const Battle = () => {
             />
             <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
           </TopBox>
-          <Rank>
+          {/* <Rank>
             <Ranking1>
               <img
                 src={`${process.env.PUBLIC_URL}/images/Group 83.png`}
@@ -370,7 +325,39 @@ const Battle = () => {
               <N2>단과대</N2>
               <Percent2>00%</Percent2>
             </Ranking3>
-          </Rank>
+          </Rank> */}
+          <div>
+            <TopBox2>
+              <ImgBox>
+                <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
+              </ImgBox>
+              <TopText>
+                <RankNum>1등</RankNum>
+                <RankUniv>단과대</RankUniv>
+                <RankPercent>00%</RankPercent>
+              </TopText>
+            </TopBox2>
+            <TopBox2>
+              <div>
+                <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
+              </div>
+              <TopText>
+                <RankNum>2등</RankNum>
+                <RankUniv>단과대</RankUniv>
+                <RankPercent>00%</RankPercent>
+              </TopText>
+            </TopBox2>
+            <TopBox2>
+              <div>
+                <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
+              </div>
+              <TopText>
+                <RankNum>3등</RankNum>
+                <RankUniv>단과대</RankUniv>
+                <RankPercent>00%</RankPercent>
+              </TopText>
+            </TopBox2>
+          </div>
           <Check onClick={checkRanking}>순위 확인하기</Check>
           <InputBox>
             <College>
