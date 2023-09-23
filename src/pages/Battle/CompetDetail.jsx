@@ -239,7 +239,7 @@ const CompetDetail = () => {
     navigate(-1); // 임시 설정
   };
 
-  // 연동 코드
+  // 연동 코드 (여기서 부터 추가!!!)
   const [postList, setPostList] = useState([]); // 배열에 받아서 저장
   const [loading, setLoading] = useState(false);
 
