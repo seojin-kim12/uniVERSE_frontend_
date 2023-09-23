@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Container = styled.div`
   display: flex;
@@ -253,137 +254,216 @@ const BoothSearch = () => {
   });
 
   return (
-    <Container>
-      <BodyWrapper>
-        <Topbar>
-          <Back>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/back.png`}
-              width="24px"
-              height="24px"
-              onClick={() => navigateToBack()}
-            />
-          </Back>
-          <Toptitle>부스 배치도</Toptitle>
-        </Topbar>
-        <Body>
-          <SearchWrapper>
-            <Search placeholder="부스 이름을 검색하세요." />
-            <SearchButton>
+    // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <BodyWrapper>
+          <Topbar>
+            <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/search-button.png`}
-                width="17px"
-                height="17px"
+                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                width="24px"
+                height="24px"
+                onClick={() => navigateToBack()}
               />
-            </SearchButton>
-          </SearchWrapper>
-          <ContentWrapper>
-            <DateWrapper>
-              <Four
-                style={getBorderStyle("four")}
-                onClick={() => handleElementClick("four")}
-              >
-                04/WED
-              </Four>
-              <Five
-                style={getBorderStyle("five")}
-                onClick={() => handleElementClick("five")}
-              >
-                05/THU
-              </Five>
-              <Six
-                style={getBorderStyle("six")}
-                onClick={() => handleElementClick("six")}
-              >
-                06/FRI
-              </Six>
-            </DateWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="100%"
-                height="1px"
-                alt="footer"
-              />
-            </Line>
-            <ContentBox>
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>우주특공솜: 비밀서류를 찾아라</BoothName>
-                  <Boothintro>
-                    참가자들은 달에 갈 수 있는 기회를 얻기 위해 서바이벌 단체
-                    O/X 퀴즈를 풀어야 하며, 문제는 동덕여대, 노래, 우주 등의
-                    주제로 이루어져 있습니다. 최후의 3인에게는 달에 착륙할 수
-                    있는 기회와 어마어마한 상품이 주어집니다.
-                  </Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-            </ContentBox>
-          </ContentWrapper>
-        </Body>
-      </BodyWrapper>
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
+            </Back>
+            <Toptitle>부스 배치도</Toptitle>
+          </Topbar>
+          <Body>
+            <SearchWrapper>
+              <Search placeholder="부스 이름을 검색하세요." />
+              <SearchButton>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/search-button.png`}
+                  width="17px"
+                  height="17px"
+                />
+              </SearchButton>
+            </SearchWrapper>
+            <ContentWrapper>
+              <DateWrapper>
+                <Four
+                  style={getBorderStyle("four")}
+                  onClick={() => handleElementClick("four")}
+                >
+                  04/WED
+                </Four>
+                <Five
+                  style={getBorderStyle("five")}
+                  onClick={() => handleElementClick("five")}
+                >
+                  05/THU
+                </Five>
+                <Six
+                  style={getBorderStyle("six")}
+                  onClick={() => handleElementClick("six")}
+                >
+                  09/FRI
+                </Six>
+              </DateWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="100%"
+                  height="1px"
+                  alt="footer"
+                />
+              </Line>
+              <ContentBox>
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="95px"
+                      height="95px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>우주특공솜: 비밀서류를 찾아라</BoothName>
+                    <Boothintro>
+                      참가자들은 달에 갈 수 있는 기회를 얻기 위해 서바이벌 단체
+                      O/X 퀴즈를 풀어야 하며, 문제는 동덕여대, 노래, 우주 등의
+                      주제로 이루어져 있습니다. 최후의 3인에게는 달에 착륙할 수
+                      있는 기회와 어마어마한 상품이 주어집니다.
+                    </Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
+
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="95px"
+                      height="95px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>우주 속 지구를 낚아라</BoothName>
+                    <Boothintro>
+                      깜깜한 우주에서 지구를 찾고 상품도 얻어가세요!
+                    </Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
+
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="95px"
+                      height="95px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>세번째</BoothName>
+                    <Boothintro>세번째설명</Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
+
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="95px"
+                      height="95px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>네번째</BoothName>
+                    <Boothintro>네번째설명</Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
+
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="95px"
+                      height="95px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>다섯번째</BoothName>
+                    <Boothintro>다섯번째설명</Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
+
+                <BoothWrapper>
+                  <BoothPic>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
+                      width="95px"
+                      height="95px"
+                    />
+                  </BoothPic>
+                  <BoothContent>
+                    <BoothName>여섯번째</BoothName>
+                    <Boothintro>여섯번째설명</Boothintro>
+                  </BoothContent>
+                </BoothWrapper>
+              </ContentBox>
+            </ContentWrapper>
+          </Body>
+        </BodyWrapper>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default BoothSearch;
