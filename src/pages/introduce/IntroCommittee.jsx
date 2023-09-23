@@ -218,7 +218,7 @@ const IntroCommittee = () => {
   };
   const GoLion = () => {
     // 버튼을 클릭할 때 페이지 이동을 수행합니다.
-    navigate("/");
+    navigate("/IntroLion");
   };
 
   const imageStyle = {
