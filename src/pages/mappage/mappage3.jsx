@@ -1,27 +1,26 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  position: relative;
-  text-align: center;
-  background-color: black;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  align-items: center;
-  /* 미디어 쿼리 적용 */
-  /* pc화면에서 너비를 390로 고정합니다*/
-  @media (hover: hover) {
-    width: 390px;
-    margin: 0 auto;
-  }
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+position: relative;
+text-align: center;\
+background-color: #000204;
 
-  /* 스크롤바 숨기기 */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+/* 미디어 쿼리 적용 */
+/* pc화면에서 너비를 390로 고정합니다*/
+@media (hover: hover) {
+  width: 390px;
+  margin: 0 auto;
+}
+
+/* 스크롤바 숨기기 */
+&::-webkit-scrollbar {
+  display: none;
+}
 `;
 const BodyWrapper = styled.div`
   min-height: calc(100vh - 150px); //푸터 공간 확보
@@ -47,7 +46,8 @@ const Boothimg = styled.div`
   padding-bottom: 20px;
 `;
 const Boothinfo = styled.div`
-  margin-left: -0px;
+  margin: 0 auto;
+  width: 300px;
 `;
 const Boothname = styled.div`
   width: 330px;
@@ -196,108 +196,115 @@ const Mappage3 = () => {
   };
 
   return (
-    <Container>
-      <BodyWrapper>
-        <Body>
-          <Topbar>
-            <Back>
+    // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <BodyWrapper>
+          <Body>
+            <Topbar>
+              <Back>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                  width="24px"
+                  height="24px"
+                  onClick={() => navigateToBack()}
+                />
+              </Back>
+            </Topbar>
+            <Boothimg>
               <img
-                src={`${process.env.PUBLIC_URL}/images/back.png`}
-                width="24px"
-                height="24px"
-                onClick={() => navigateToBack()}
+                src={`${process.env.PUBLIC_URL}/images/boothimg_temp.png`}
+                width="320px"
+                height="320px"
+                alt="boothimg"
               />
-            </Back>
-          </Topbar>
-          <Boothimg>
+            </Boothimg>
+            <Boothinfo>
+              <Boothname>부스 이름</Boothname>
+              <Intro>한줄소개</Intro>
+              <Detail_detail>
+                <Time>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
+                    width="14px"
+                    height="17px"
+                    alt="timeicon"
+                  />
+                  <Time_detail>1232154678</Time_detail>
+                </Time>
+                <Place>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
+                    width="13.993px"
+                    height="17px"
+                    alt="placeicon"
+                  />
+                  <Place_detail>숭인관에서 함</Place_detail>
+                </Place>
+              </Detail_detail>
+            </Boothinfo>
+          </Body>
+        </BodyWrapper>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/boothimg_temp.png`}
-              width="320px"
-              height="320px"
-              alt="boothimg"
-            />
-          </Boothimg>
-          <Boothinfo>
-            <Boothname>부스 이름</Boothname>
-            <Intro>한줄소개</Intro>
-            <Detail_detail>
-              <Time>
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
-                  width="14px"
-                  height="17px"
-                  alt="timeicon"
-                />
-                <Time_detail>1232154678</Time_detail>
-              </Time>
-              <Place>
-                <img
-                  src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
-                  width="13.993px"
-                  height="17px"
-                  alt="placeicon"
-                />
-                <Place_detail>숭인관에서 함</Place_detail>
-              </Place>
-            </Detail_detail>
-          </Boothinfo>
-        </Body>
-      </BodyWrapper>
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default Mappage3;
