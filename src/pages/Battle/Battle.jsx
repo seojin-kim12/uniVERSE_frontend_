@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -242,17 +245,18 @@ const RankNum = styled.div`
 `;
 const RankUniv = styled.div`
   position: absolute;
-  margin-left: 140px;
+  margin-left: 132px;
   color: #fff;
   font-family: SUIT;
-  font-size: 20px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
 `;
 const RankPercent = styled.div`
   position: absolute;
-  margin-left: 280px;
+  margin-left: 290px;
+  margin-top: -2px;
   color: #fff;
   font-family: SUIT;
   font-size: 20px;
@@ -263,6 +267,8 @@ const RankPercent = styled.div`
 
 const Battle = () => {
   const navigate = useNavigate();
+  const [selectedCollege, setSelectedCollege] = useState(""); // 선택한 단과대학 상태
+  const [stuId, setStuId] = useState(""); // 학번 상태
 
   const onClickBtn = () => {
     navigate(-1); // 바로 이전 페이지로 이동, '/main' 등 직접 지정도 당연히 가능
@@ -272,171 +278,211 @@ const Battle = () => {
     navigate(`/CompetDetail`);
   };
 
+  // 연동 코드 (여기서 부터 추가!!!)
+  const [postList, setPostList] = useState([]); // 배열에 받아서 저장
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        // API 호출
+        const response = await axios.get("http://127.0.0.1:8000/competition/");
+        setPostList(response.data.collegeRank); //collegeRank 배열 저장
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>잠시만 기다려주세요^_^</div>;
+  }
+
+  const onParticipationClick = async () => {
+    try {
+      // 선택한 단과대학과 학번을 서버로 보내기
+      const response = await axios.post("http://127.0.0.1:8000/student-info/", {
+        college: selectedCollege,
+        stuId,
+      });
+
+      // 서버 응답 처리
+      console.log("서버 응답:", response.data);
+      navigate(`/CompetDetail`);
+
+      // // POST 요청이 성공한 경우에만 다른 페이지로 이동
+      // if (response.status === 200 && response.data.success) {
+      //   // 이동 처리
+      //   navigate(`/CompetDetail`);
+      // }
+    } catch (error) {
+      // 오류 처리
+      console.error("데이터 전송 오류:", error);
+      alert("올바른 학번을 입력하세요");
+    }
+  };
+
   return (
-    <Container>
-      <TopBar>
-        <Back onClick={onClickBtn}>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
-            alt="back"
-            width="24px"
-          />
-        </Back>
-        <Title>단과 대항전</Title>
-        <None></None>
-      </TopBar>
-      <BodyWrapper>
-        <Body>
-          <TopBox>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <TopBar>
+          <Back onClick={onClickBtn}>
             <img
-              src={`${process.env.PUBLIC_URL}/images/Union.png`}
+              src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
               alt="back"
-              width="197.451px"
-              height="39.774px"
+              width="24px"
             />
-            <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
-          </TopBox>
-          {/* <Rank>
-            <Ranking1>
+          </Back>
+          <Title>단과 대항전</Title>
+          <None></None>
+        </TopBar>
+        <BodyWrapper>
+          <Body>
+            <TopBox>
               <img
-                src={`${process.env.PUBLIC_URL}/images/Group 83.png`}
+                src={`${process.env.PUBLIC_URL}/images/Union.png`}
                 alt="back"
-                width="313.942px"
+                width="197.451px"
+                height="39.774px"
               />
-              <R1>1등</R1>
-              <N1>단과대</N1>
-              <Percent>00%</Percent>
-            </Ranking1>
-            <Ranking2>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/Group 84.png`}
-                width="300px"
-              />
-              <R2>2등</R2>
-              <N2>단과대</N2>
-              <Percent2>00%</Percent2>
-            </Ranking2>
-            <Ranking3>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/Group 85.png`}
-                width="300px"
-              />
-              <R2>3등</R2>
-              <N2>단과대</N2>
-              <Percent2>00%</Percent2>
-            </Ranking3>
-          </Rank> */}
-          <div>
-            <TopBox2>
-              <ImgBox>
-                <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
-              </ImgBox>
-              <TopText>
-                <RankNum>1등</RankNum>
-                <RankUniv>단과대</RankUniv>
-                <RankPercent>00%</RankPercent>
-              </TopText>
-            </TopBox2>
-            <TopBox2>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
-              </div>
-              <TopText>
-                <RankNum>2등</RankNum>
-                <RankUniv>단과대</RankUniv>
-                <RankPercent>00%</RankPercent>
-              </TopText>
-            </TopBox2>
-            <TopBox2>
-              <div>
-                <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
-              </div>
-              <TopText>
-                <RankNum>3등</RankNum>
-                <RankUniv>단과대</RankUniv>
-                <RankPercent>00%</RankPercent>
-              </TopText>
-            </TopBox2>
-          </div>
-          <Check onClick={checkRanking}>순위 확인하기</Check>
-          <InputBox>
-            <College>
-              <option value="" disabled selected>
-                단과대학을 선택하세요
-              </option>
-              <option value="0">인문대학</option>
-              <option value="1">사회과학대학</option>
-              <option value="2">자연정보과학대학</option>
-              <option value="3">약학대학</option>
-              <option value="4">예술대학</option>
-              <option value="5">디자인대학</option>
-              <option value="6">공연예술대학</option>
-              <option value="7">문화지식융합대학</option>
-              <option value="8">미래인재융합대학</option>
-            </College>
-            <Input type="text" placeholder="학번" id="number"></Input>
-          </InputBox>
-          <Explain>
-            참여율로 순위가 집계되며 축제기간동안 1회 참여 가능합니다.
-          </Explain>
-          <Participation onClick={checkRanking}>참여하기</Participation>
-        </Body>
-      </BodyWrapper>
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
+              <TopTitle>현재 참여율 TOP 3 단과대</TopTitle>
+            </TopBox>
+            <div>
+              <TopBox2>
+                <ImgBox>
+                  <img src={`${process.env.PUBLIC_URL}/images/1stdept.svg`} />
+                </ImgBox>
+                <TopText>
+                  <RankNum>{postList[0] && postList[0].rank}등</RankNum>
+                  <RankUniv>{postList[0] && postList[0].college}</RankUniv>
+                  <RankPercent>
+                    {postList[0] && postList[0].participationRate}%
+                  </RankPercent>
+                </TopText>
+              </TopBox2>
+              <TopBox2>
+                <div>
+                  <img src={`${process.env.PUBLIC_URL}/images/2nddept.svg`} />
+                </div>
+                <TopText>
+                  <RankNum>{postList[1] && postList[1].rank}등</RankNum>
+                  <RankUniv>{postList[1] && postList[1].college}</RankUniv>
+                  <RankPercent>
+                    {postList[1] && postList[1].participationRate}%
+                  </RankPercent>
+                </TopText>
+              </TopBox2>
+              <TopBox2>
+                <div>
+                  <img src={`${process.env.PUBLIC_URL}/images/3rddept.svg`} />
+                </div>
+                <TopText>
+                  <RankNum>{postList[2] && postList[2].rank}등</RankNum>
+                  <RankUniv>{postList[2] && postList[2].college}</RankUniv>
+                  <RankPercent>
+                    {postList[2] && postList[2].participationRate}%
+                  </RankPercent>
+                </TopText>
+              </TopBox2>
+            </div>
+            <Check onClick={checkRanking}>순위 확인하기</Check>
+            <InputBox>
+              <College
+                value={selectedCollege}
+                onChange={(e) => setSelectedCollege(e.target.value)}
+              >
+                <option value="" disabled selected>
+                  단과대학을 선택하세요
+                </option>
+                <option value="college1">인문대학</option>
+                <option value="college2">사회과학대학</option>
+                <option value="college3">자연정보과학대학</option>
+                <option value="college4">약학대학</option>
+                <option value="college5">예술대학</option>
+                <option value="college6">디자인대학</option>
+                <option value="college7">공연예술대학</option>
+                <option value="college8">문화지식융합대학</option>
+                <option value="college9">미래인재융합대학</option>
+              </College>
+              <Input
+                type="text"
+                placeholder="학번"
+                id="number"
+                value={stuId}
+                onChange={(e) => setStuId(e.target.value)}
+              ></Input>
+            </InputBox>
+            <Explain>
+              참여율로 순위가 집계되며 축제기간동안 1회 참여 가능합니다.
+            </Explain>
+            <Participation onClick={onParticipationClick}>
+              참여하기
+            </Participation>
+          </Body>
+        </BodyWrapper>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default Battle;
