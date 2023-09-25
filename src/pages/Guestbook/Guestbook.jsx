@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import "./CustomScrollbar.css";
+import axios from "axios";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -10,8 +11,6 @@ const GlobalStyle = createGlobalStyle`
     font-weight: normal;
     font-style: normal;
   }
-
-  
 `;
 
 const Container = styled.div`
@@ -141,21 +140,19 @@ const CommentInput = styled.textarea`
 
   width: 250px;
   height: 40px;
-<<<<<<< HEAD
 
-  margin-top: -56px;
-  margin-left: 35px;
-
-=======
-  //56
   margin-top: -53px;
-  margin-left: -50px;
+  margin-left: -53px;
   margin-bottom: 30px;
->>>>>>> 752b4a204d9d857c261ce2e9a3ba23943067df4d
+
   resize: none;
 
   &::placeholder {
     color: #fff;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -178,13 +175,12 @@ const StyledImage = styled.img`
   margin-right: 10px;
 `;
 
-//230
 const StyledBox = styled.div`
   position: relative;
 
   border-radius: 0px;
   width: 75%;
-  min-height: 60.56px;
+  min-height: 62px;
   max-width: 250px;
   border: 1.5px solid transparent;
   border-image: linear-gradient(180deg, #9d9bf5, #ff98df) 1;
@@ -194,7 +190,7 @@ const StyledBox = styled.div`
     rgba(191, 155, 245, 0) 100%
   );
 
-  margin-top: -68px;
+  margin-top: -67px;
   margin-left: 73px;
 `;
 
@@ -206,6 +202,7 @@ const Guestbook = () => {
 
   const [comment, setComment] = useState("");
   const [commentsWithSomBox, setCommentsWithSomBox] = useState([]);
+
   const commentRefs = useRef([]); // 새 댓글에 포커스 맞추기
 
   useEffect(() => {
@@ -220,13 +217,48 @@ const Guestbook = () => {
     }
   }, [commentsWithSomBox]);
 
-  const addComment = () => {
-    // 댓글 추가 함수
+  useEffect(() => {
+    async function fetchComments() {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/guestbook/", {
+          content: comment,
+        });
+        if (response.status === 200) {
+          const comments = response.data; // 서버에서 받아온 댓글 목록
+          setCommentsWithSomBox(comments); // 댓글 목록을 상태에 설정
+        } else {
+          console.error("댓글 목록을 불러오는데 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("댓글 목록을 불러오는 중 오류가 발생했습니다.", error);
+      }
+    }
+
+    fetchComments(); // 함수 실행
+  }, []); // 빈 배열을 전달하여 컴포넌트가 로드될 때 한 번만 실행되도록 설정
+
+  const addComment = async () => {
     if (comment.trim() !== "") {
-      // 입력된 댓글이 비어있지 않을 때만 추가
-      const newComment = { text: comment, image: "./images/somsom.png" };
-      setCommentsWithSomBox([...commentsWithSomBox, newComment]);
-      setComment(""); // 입력 필드 비우기
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/guestbook/", {
+          content: comment,
+        });
+
+        if (response.status === 200) {
+          // 성공적으로 댓글이 생성된 경우
+          console.log("댓글이 성공적으로 생성되었습니다.");
+          const newComment = {
+            text: comment,
+            image: "./images/somsom.png",
+          };
+          setCommentsWithSomBox([...commentsWithSomBox, newComment]);
+          setComment(""); // 입력 필드 비우기
+        } else {
+          console.error("댓글 생성에 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("댓글 생성 중 오류가 발생했습니다.", error);
+      }
     }
   };
 
@@ -260,7 +292,7 @@ const Guestbook = () => {
               <div key={index}>
                 <StyledImage src={item.image} alt={`comment-image-${index}`} />
                 <StyledBox alt={`comment-box-${index}`}>
-                  <div className="comment-som ">SomSom</div>
+                  <div className="comment-som">SomSom</div>
                   <div className="comment-text">{item.text}</div>
                 </StyledBox>
               </div>
@@ -287,7 +319,6 @@ const Guestbook = () => {
             }}
           />
         </CommentBox>
-
         <Send onClick={addComment}>
           <img
             src={`${process.env.PUBLIC_URL}/images/send.png`}
