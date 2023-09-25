@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled, { createGlobalStyle } from "styled-components";
+import { useNavigate } from "react-router-dom";
 import "./CustomScrollbar.css";
+import axios from "axios";
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
@@ -40,6 +42,11 @@ const Backbtn = styled.div`
 
   margin-top: 33px;
   margin-right: 315px;
+
+  z-index: 5;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.div`
@@ -52,12 +59,14 @@ const Title = styled.div`
   font-weight: 700;
   line-height: normal;
 
+  weight: 10px;
+
   margin-top: -34px;
 `;
 
 const CommentWrapper = styled.div`
   position: relative;
-  margin-top: 18px;
+  margin-top: 10px;
 `;
 
 const CommentBoxLine = styled.div`
@@ -68,7 +77,9 @@ const CommentBoxLine = styled.div`
     /*1px solid #fff;*/
   }
   height: 472px;
-  width: 315px;
+  min-width: 315px;
+  max-width: 330px;
+  width: 70%;
   margin-top: -510px;
 
   overflow-x: hidden;
@@ -103,11 +114,17 @@ const CommentBoxLine = styled.div`
 
 const CommentBox = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin-top: 65px;
+  margin-bottom: 5px;
 `;
 
 const CommentInput = styled.textarea`
   position: relative;
+
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -123,20 +140,29 @@ const CommentInput = styled.textarea`
 
   width: 250px;
   height: 40px;
-  margin-top: -56px;
-  margin-left: 35px;
+
+  margin-top: -53px;
+  margin-left: -53px;
+  margin-bottom: 30px;
+
   resize: none;
 
   &::placeholder {
     color: #fff;
   }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const Send = styled.div`
   position: relative;
+  margin: auto 0;
 
   margin-left: 270px;
-  margin-top: -40px;
+  margin-top: -75px;
+  margin-bottom: 15px;
 `;
 
 const StyledImage = styled.img`
@@ -146,13 +172,16 @@ const StyledImage = styled.img`
 
   margin-top: 10px;
   margin-left: -242px;
+  margin-right: 10px;
 `;
 
 const StyledBox = styled.div`
   position: relative;
+
   border-radius: 0px;
-  width: 230px;
-  min-height: 60.56px;
+  width: 75%;
+  min-height: 62px;
+  max-width: 250px;
   border: 1.5px solid transparent;
   border-image: linear-gradient(180deg, #9d9bf5, #ff98df) 1;
   background: linear-gradient(
@@ -161,13 +190,19 @@ const StyledBox = styled.div`
     rgba(191, 155, 245, 0) 100%
   );
 
-  margin-top: -68px;
+  margin-top: -67px;
   margin-left: 73px;
 `;
 
 const Guestbook = () => {
+  const navigate = useNavigate();
+  const GoBack = () => {
+    navigate("/");
+  };
+
   const [comment, setComment] = useState("");
   const [commentsWithSomBox, setCommentsWithSomBox] = useState([]);
+
   const commentRefs = useRef([]); // 새 댓글에 포커스 맞추기
 
   useEffect(() => {
@@ -182,13 +217,28 @@ const Guestbook = () => {
     }
   }, [commentsWithSomBox]);
 
-  const addComment = () => {
-    // 댓글 추가 함수
+  const addComment = async () => {
     if (comment.trim() !== "") {
-      // 입력된 댓글이 비어있지 않을 때만 추가
-      const newComment = { text: comment, image: "./images/somsom.png" };
-      setCommentsWithSomBox([...commentsWithSomBox, newComment]);
-      setComment(""); // 입력 필드 비우기
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/guestbook/", {
+          content: comment,
+        });
+
+        if (response.status === 200) {
+          // 성공적으로 댓글이 생성된 경우
+          console.log("댓글이 성공적으로 생성되었습니다.");
+          const newComment = {
+            text: comment,
+            image: "./images/somsom.png",
+          };
+          setCommentsWithSomBox([...commentsWithSomBox, newComment]);
+          setComment(""); // 입력 필드 비우기
+        } else {
+          console.error("댓글 생성에 실패했습니다.");
+        }
+      } catch (error) {
+        console.error("댓글 생성 중 오류가 발생했습니다.", error);
+      }
     }
   };
 
@@ -201,6 +251,7 @@ const Guestbook = () => {
             src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
             alt="backbtn"
             width="26px"
+            onClick={GoBack}
           />
         </Backbtn>
         <Title>방명록</Title>
@@ -208,15 +259,20 @@ const Guestbook = () => {
           <img
             src={`${process.env.PUBLIC_URL}/images/cmtwrapper.png`}
             alt="cmtwrapper"
-            width="350px"
+            width="75%"
             height="540px"
+            style={{
+              minWidth: "360px",
+              maxWidth: "425px",
+              maxHeight: "900px",
+            }}
           />
           <CommentBoxLine ref={commentRefs}>
             {commentsWithSomBox.map((item, index) => (
               <div key={index}>
                 <StyledImage src={item.image} alt={`comment-image-${index}`} />
                 <StyledBox alt={`comment-box-${index}`}>
-                  <div className="comment-som ">SomSom</div>
+                  <div className="comment-som">SomSom</div>
                   <div className="comment-text">{item.text}</div>
                 </StyledBox>
               </div>
@@ -227,21 +283,22 @@ const Guestbook = () => {
           <img
             src={`${process.env.PUBLIC_URL}/images/cmtbox.png`}
             alt="cmtbox"
-            width="337px"
+            width="70%"
+            style={{ minWidth: "337px", maxWidth: "400px", marginTop: "-5px" }}
+          />
+          <CommentInput
+            type="text"
+            placeholder={"댓글을 입력하세요."}
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                addComment();
+              }
+            }}
           />
         </CommentBox>
-        <CommentInput
-          type="text"
-          placeholder={"댓글을 입력하세요."}
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              addComment();
-            }
-          }}
-        />
         <Send onClick={addComment}>
           <img
             src={`${process.env.PUBLIC_URL}/images/send.png`}

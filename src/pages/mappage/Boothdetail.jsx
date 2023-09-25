@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useState, useEffect } from "react"; // useState와 useEffect 추가
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -28,15 +30,11 @@ const BodyWrapper = styled.div`
 
 const Body = styled.div`
   align-items: center;
-  height: 100%;
-  padding: 0 5.5%;
 `;
 const Topbar = styled.div`
   display: flex;
   justify-content: space-between;
-  height: 70px;
-  margin-bottom: 5px;
-  box-sizing: border-box;
+  height: 86px;
   align-items: center;
   padding-left: 12px;
 `;
@@ -45,56 +43,105 @@ const Back = styled.div`
   position: absolute;
   left: 27px;
 `;
-const Toptitle = styled.div`
-  color: #fff;
-  cursor: pointer;
-  margin: auto;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  padding-bottom: 5px;
+const BoothCon = styled.div``;
+const Boothimg = styled.div`
+  margin: auto 0;
+  padding-bottom: 20px;
 `;
-const Map = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: column; /* Center vertically */
-  align-items: center; /* Center horizontally */
-  margin-top: 60px;
-  padding-bottom: 30%;
+const Boothinfo = styled.div`
+  margin: 0 auto;
+  width: 300px;
+  margin-bottom: 50px;
 `;
-const Mapframe = styled.div`
-  position: absolute;
-  margin-top: -29px;
-`;
-const Boothdetail_button = styled.div`
-  position: relative;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  flex-direction: column; /* 수직 중앙 정렬 */
-  cursor: pointer;
-  padding-bottom: 40%;
-`;
-
-const Boothdetail_ment = styled.div`
-  position: absolute;
+const Boothname = styled.div`
+  width: 310px;
+  height: 34.614px;
+  flex-shrink: 0;
   color: #4fdfff;
   font-family: SUIT;
-  font-size: 15px;
+  font-size: 27.089px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  top: 50%; /* 부스 버튼의 중앙에서 위로 50% 이동 */
-  transform: translateY(-50%); /* 위로 이동해서 수직 중앙 정렬 */
-  padding-bottom: 40%;
+  padding-bottom: 15px;
+  text-align: left;
 `;
 
+const Intro = styled.div`
+  width: 310px;
+  height: 120px;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 18.059px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  margin-top: 7px;
+  overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
+`;
+const BoothintroContent = styled.div`
+  height: 100%;
+  overflow-y: auto; /* 세로 스크롤바 표시 */
+`;
+const Detail_detail = styled.div`
+  margin-left: 10px;
+  margin-top: 30px;
+`;
+const Time = styled.div`
+  width: 310px;
+  height: 34.614px;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 18.059px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  display: flex;
+`;
+const Time_detail = styled.div`
+  height: 22px;
+  flex-shrink: 0;
+  color: #4fdfff;
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 10px;
+  margin-top: -2px;
+`;
+const Place = styled.div`
+  height: 34.614px;
+  flex-shrink: 0;
+  color: #fff;
+  font-family: SUIT;
+  font-size: 18.059px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: left;
+  display: flex;
+`;
+const Place_detail = styled.div`
+  width: 310px;
+  height: 34px;
+  flex-shrink: 0;
+  color: #4fdfff;
+  font-family: SUIT;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-left: 10px;
+  margin-top: -2px;
+`;
 const Footer = styled.div`
   height: 150px;
   position: relative;
-  border: none;
-  margin: 0;
 `;
 const Left = styled.div`
   position: absolute;
@@ -150,11 +197,31 @@ const Right = styled.div`
   top: -3px;
 `;
 
-const Mappage1 = () => {
+const Boothdetail = () => {
   const navigate = useNavigate();
-  const goDeatil = () => {
-    navigate("/BoothSearch");
+  const navigateToBack = () => {
+    navigate(-1);
   };
+
+  //axios_backend 연동작업 시작
+  const [Booth, setBooth] = useState([]);
+  const { boothId } = useParams(); // 경로 파라미터 값 가져오기
+  const BACKEND_URL = "http://127.0.0.1:8000";
+
+  useEffect(() => {
+    const apiUrl = `${BACKEND_URL}/booth-detail/${boothId}/`;
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setBooth(response.data);
+        console.log(response.data); // 부스 정보 확인
+      })
+      .catch((error) => {
+        console.error("에러 발생: ", error);
+      });
+  }, [boothId]);
+
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
@@ -171,39 +238,46 @@ const Mappage1 = () => {
                   src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                   width="24px"
                   height="24px"
-                  onClick={() => navigate(-1)}
+                  onClick={() => navigateToBack()}
                 />
               </Back>
-              <Toptitle>부스 배치도</Toptitle>
             </Topbar>
-            <Map>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/map_temp.png`}
-                width="280px"
-                height="280px"
-                alt="map"
-              />
-              <Mapframe>
+            <BoothCon>
+              <Boothimg>
                 <img
-                  src={`${process.env.PUBLIC_URL}/images/map_mappage1.png`}
-                  width="337px"
-                  height="338.5px"
-                  alt="map"
+                  src={`${BACKEND_URL}${Booth.image}`}
+                  width="320px"
+                  height="320px"
+                  alt="boothimg"
                 />
-              </Mapframe>
-            </Map>
-            <Boothdetail_button>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/boothdetail_go_button.png`}
-                width="337px"
-                height="62px"
-                alt="boothdetail_button"
-                onClick={goDeatil}
-              />
-              <Boothdetail_ment onClick={goDeatil}>
-                부스 보러가기
-              </Boothdetail_ment>
-            </Boothdetail_button>
+              </Boothimg>
+              <Boothinfo>
+                <Boothname>{Booth.name}</Boothname>
+                <Intro>
+                  <BoothintroContent> {Booth.introduce}</BoothintroContent>
+                </Intro>
+                <Detail_detail>
+                  <Time>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
+                      width="14px"
+                      height="17px"
+                      alt="timeicon"
+                    />
+                    <Time_detail>{Booth.date}</Time_detail>
+                  </Time>
+                  <Place>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
+                      width="13.993px"
+                      height="17px"
+                      alt="placeicon"
+                    />
+                    <Place_detail>{Booth.place}</Place_detail>
+                  </Place>
+                </Detail_detail>
+              </Boothinfo>
+            </BoothCon>
           </Body>
         </BodyWrapper>
         <Footer>
@@ -264,4 +338,4 @@ const Mappage1 = () => {
     </motion.div>
   );
 };
-export default Mappage1;
+export default Boothdetail;
