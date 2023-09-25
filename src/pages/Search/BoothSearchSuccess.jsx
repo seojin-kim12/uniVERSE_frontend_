@@ -162,15 +162,18 @@ const BoothPic = styled.div`
 `;
 const BoothContent = styled.div`
   margin-right: auto;
-  padding-left: 12px;
+  padding-left: 8px;
 `;
 const BoothName = styled.div`
   color: #4fdfff;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   text-align: left;
   position: absolute;
   top: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const Boothintro = styled.div`
   color: #fff;
