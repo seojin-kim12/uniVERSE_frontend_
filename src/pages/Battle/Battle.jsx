@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
@@ -308,6 +311,7 @@ const Battle = () => {
         college: selectedCollege,
         stuId,
       });
+
       // 서버 응답 처리
       console.log("서버 응답:", response.data);
       navigate(`/CompetDetail`);
@@ -320,6 +324,7 @@ const Battle = () => {
     } catch (error) {
       // 오류 처리
       console.error("데이터 전송 오류:", error);
+      alert("올바른 학번을 입력하세요");
     }
   };
 
