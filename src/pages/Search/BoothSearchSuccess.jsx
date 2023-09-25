@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -128,6 +130,8 @@ const Count = styled.div`
   padding-left: 17px;
 `;
 const BoothWrapper = styled.div`
+  cursor: pointer;
+  position: relative;
   border-radius: 14px;
   border: 1px solid #4fdfff;
   background: linear-gradient(
@@ -149,41 +153,36 @@ const BoothWrapper = styled.div`
   }
 `;
 const BoothPic = styled.div`
-  width: 91px;
-  height: 91px;
+  width: 95px;
+  height: 95px;
   display: inline-block;
-  border-radius: 14px;
-  border: 1px solid #4fdfff;
+  left: -2px;
+  margin-left: -2px;
+  margin-top: 3px;
 `;
 const BoothContent = styled.div`
-  display: inline-block;
   margin-right: auto;
-  padding-left: 16px;
-  width: 65%;
-  padding-bottom: 18px;
+  padding-left: 8px;
 `;
 const BoothName = styled.div`
   color: #4fdfff;
-  width: 100%;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   text-align: left;
-  white-space: nowrap;
+  position: absolute;
+  top: 8px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 const Boothintro = styled.div`
   color: #fff;
-  font-size: 8px;
-  font-weight: 400;
+  font-size: 4px;
+  font-weight: 100;
   text-align: left;
-  margin-top: 8px;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  position: absolute;
+  top: 30px;
+  padding-right: 10px;
 `;
 
 const Footer = styled.div`
@@ -249,19 +248,36 @@ const Right = styled.div`
 const BoothSearchSuccess = () => {
   const navigate = useNavigate();
   const navigateToBack = () => {
-    navigate(-1);
+    navigate("/BoothSearch");
+  };
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleNameButtonClick(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
   };
 
   // 기본 클릭 요소 설정
   const [clickedElement, setClickedElement] = useState("four");
+  const [category, setCategory] = useState("day1"); // 초기값을 "day1"로 설정
 
   const handleElementClick = (element) => {
     setClickedElement(element);
+    setCategory((prevCategory) => {
+      if (element === "four") {
+        return "day1";
+      } else if (element === "five") {
+        return "day2";
+      } else if (element === "six") {
+        return "day3";
+      }
+      return prevCategory;
+    });
   };
 
   useEffect(() => {
-    setClickedElement("four");
-  }, []);
+    // category가 변경될 때 실행될 작업을 여기에 넣으세요
+    handleNameButtonClick(); // 예를 들어, handleNameButtonClick 호출
+  }, [category]); // category가 변경될 때만 이 useEffect가 실행됩니다.
 
   const getBorderStyle = (element) => ({
     color: "#FFF",
@@ -270,6 +286,74 @@ const BoothSearchSuccess = () => {
     cursor: "pointer",
   });
 
+  const [name, setName] = useState("");
+  const [booths, setBooths] = useState([]);
+  const [boothCount, setboothCount] = useState([]);
+  const BACKEND_URL = "http://127.0.0.1:8000"; // 실제 백엔드 서버 주소로 변경해야 합니다.
+
+  const handleNameInputChange = (event) => {
+    setName(event.target.value);
+  };
+
+  // 검색 버튼 클릭 시 검색어를 사용하여 API 호출
+  const handleNameButtonClick = () => {
+    const encodedName = encodeURIComponent(name);
+    const encodedCategory = encodeURIComponent(category);
+    if (encodedName) {
+      axios
+        .get(`${BACKEND_URL}/booth-search`, {
+          params: {
+            name: name,
+            category: category,
+          },
+        })
+        .then(function (result) {
+          navigate(
+            `/BoothSearchSuccess/?name=${encodedName}&category=${encodedCategory}`
+          );
+          setBooths(result.data.results);
+          setboothCount(result.data.resultsCount);
+          console.log(result.data.results);
+          console.log(category);
+        })
+        .catch(function (error) {
+          setBooths({});
+          setboothCount(0);
+          console.error("에러 발생 : ", error);
+        });
+    }
+  };
+
+  const location = useLocation();
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const nameParam = searchParams.get("name");
+    if (nameParam) {
+      setName(nameParam);
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    if (name !== "" && booths.length === 0) {
+      // booths가 비어있을 때만 실행
+      handleNameButtonClick();
+      // 여기에서 다른 로직을 실행할 수 있습니다.
+    }
+  }, [name, booths]);
+
+  const imgStyle = {
+    borderRadius: "14px",
+    border: "1px solid #4fdfff",
+  };
+  const failStyle = {
+    marginTop: "35px",
+    marginBottom: "19px",
+    color: "#4fdfff",
+    fontSize: "14px",
+    fontWeight: "400",
+    textAlign: "left",
+    paddingLeft: "17px",
+  };
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
@@ -285,19 +369,26 @@ const BoothSearchSuccess = () => {
                 src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
                 width="24px"
                 height="24px"
-                onClick={() => navigateToBack()}
+                onClick={navigateToBack}
+                alt="뒤로 가기"
               />
             </Back>
             <Toptitle>부스 배치도</Toptitle>
           </Topbar>
           <Body>
             <SearchWrapper>
-              <Search placeholder="부스 이름을 검색하세요." />
-              <SearchButton>
+              <Search
+                placeholder="부스 이름을 검색하세요."
+                value={name}
+                onChange={handleNameInputChange}
+                onKeyPress={handleOnKeyPress}
+              />
+              <SearchButton onClick={handleNameButtonClick}>
                 <img
                   src={`${process.env.PUBLIC_URL}/images/search-button.png`}
                   width="17px"
                   height="17px"
+                  alt="검색"
                 />
               </SearchButton>
             </SearchWrapper>
@@ -305,7 +396,9 @@ const BoothSearchSuccess = () => {
               <DateWrapper>
                 <Four
                   style={getBorderStyle("four")}
-                  onClick={() => handleElementClick("four")}
+                  onClick={() => {
+                    handleElementClick("four");
+                  }}
                 >
                   04/WED
                 </Four>
@@ -319,7 +412,7 @@ const BoothSearchSuccess = () => {
                   style={getBorderStyle("six")}
                   onClick={() => handleElementClick("six")}
                 >
-                  09/FRI
+                  06/FRI
                 </Six>
               </DateWrapper>
               <Line>
@@ -331,20 +424,35 @@ const BoothSearchSuccess = () => {
                 />
               </Line>
               <ContentBox>
-                <Count>총 1개의 이벤트</Count>
-                <BoothWrapper>
-                  <BoothPic>
-                    <img
-                      src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                      width="91px"
-                      height="91px"
-                    />
-                  </BoothPic>
-                  <BoothContent>
-                    <BoothName>검색결과1</BoothName>
-                    <Boothintro>검색결과설명1</Boothintro>
-                  </BoothContent>
-                </BoothWrapper>
+                {boothCount === 0 ? (
+                  <p style={failStyle}>검색 결과가 없습니다.</p>
+                ) : (
+                  <div>
+                    <Count>총 {boothCount}개의 이벤트</Count>
+                    {booths.map((booth) => (
+                      <BoothWrapper
+                        key={booth.boothId}
+                        onClick={() =>
+                          navigate(`/booth-detail/${booth.boothId}/`)
+                        }
+                      >
+                        <BoothPic>
+                          <img
+                            src={`${BACKEND_URL}${booth.image}`}
+                            alt={booth.name}
+                            width="91px"
+                            height="91px"
+                            style={imgStyle}
+                          />
+                        </BoothPic>
+                        <BoothContent>
+                          <BoothName>{booth.name}</BoothName>
+                          <Boothintro>{booth.introduce}</Boothintro>
+                        </BoothContent>
+                      </BoothWrapper>
+                    ))}
+                  </div>
+                )}
               </ContentBox>
             </ContentWrapper>
           </Body>
@@ -407,4 +515,5 @@ const BoothSearchSuccess = () => {
     </motion.div>
   );
 };
+
 export default BoothSearchSuccess;

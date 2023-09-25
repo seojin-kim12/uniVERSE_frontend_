@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import axios from "axios";
+import { useState, useEffect } from "react"; // useState와 useEffect 추가
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -41,6 +43,7 @@ const Back = styled.div`
   position: absolute;
   left: 27px;
 `;
+const BoothCon = styled.div``;
 const Boothimg = styled.div`
   margin: auto 0;
   padding-bottom: 20px;
@@ -48,9 +51,10 @@ const Boothimg = styled.div`
 const Boothinfo = styled.div`
   margin: 0 auto;
   width: 300px;
+  margin-bottom: 50px;
 `;
 const Boothname = styled.div`
-  width: 330px;
+  width: 310px;
   height: 34.614px;
   flex-shrink: 0;
   color: #4fdfff;
@@ -64,8 +68,8 @@ const Boothname = styled.div`
 `;
 
 const Intro = styled.div`
-  width: 330px;
-  height: 100px;
+  width: 310px;
+  height: 120px;
   flex-shrink: 0;
   color: #fff;
   font-family: SUIT;
@@ -74,10 +78,16 @@ const Intro = styled.div`
   font-weight: 400;
   line-height: normal;
   text-align: left;
+  margin-top: 7px;
+  overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
+`;
+const BoothintroContent = styled.div`
+  height: 100%;
+  overflow-y: auto; /* 세로 스크롤바 표시 */
 `;
 const Detail_detail = styled.div`
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 30px;
 `;
 const Time = styled.div`
   width: 310px;
@@ -93,7 +103,6 @@ const Time = styled.div`
   display: flex;
 `;
 const Time_detail = styled.div`
-  width: 210px;
   height: 22px;
   flex-shrink: 0;
   color: #4fdfff;
@@ -106,7 +115,6 @@ const Time_detail = styled.div`
   margin-top: -2px;
 `;
 const Place = styled.div`
-  width: 310px;
   height: 34.614px;
   flex-shrink: 0;
   color: #fff;
@@ -189,11 +197,30 @@ const Right = styled.div`
   top: -3px;
 `;
 
-const Mappage3 = () => {
+const Boothdetail = () => {
   const navigate = useNavigate();
   const navigateToBack = () => {
     navigate(-1);
   };
+
+  //axios_backend 연동작업 시작
+  const [Booth, setBooth] = useState([]);
+  const { boothId } = useParams(); // 경로 파라미터 값 가져오기
+  const BACKEND_URL = "http://127.0.0.1:8000";
+
+  useEffect(() => {
+    const apiUrl = `${BACKEND_URL}/booth-detail/${boothId}/`;
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setBooth(response.data);
+        console.log(response.data); // 부스 정보 확인
+      })
+      .catch((error) => {
+        console.error("에러 발생: ", error);
+      });
+  }, [boothId]);
 
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
@@ -215,38 +242,42 @@ const Mappage3 = () => {
                 />
               </Back>
             </Topbar>
-            <Boothimg>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/boothimg_temp.png`}
-                width="320px"
-                height="320px"
-                alt="boothimg"
-              />
-            </Boothimg>
-            <Boothinfo>
-              <Boothname>부스 이름</Boothname>
-              <Intro>한줄소개</Intro>
-              <Detail_detail>
-                <Time>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
-                    width="14px"
-                    height="17px"
-                    alt="timeicon"
-                  />
-                  <Time_detail>1232154678</Time_detail>
-                </Time>
-                <Place>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
-                    width="13.993px"
-                    height="17px"
-                    alt="placeicon"
-                  />
-                  <Place_detail>숭인관에서 함</Place_detail>
-                </Place>
-              </Detail_detail>
-            </Boothinfo>
+            <BoothCon>
+              <Boothimg>
+                <img
+                  src={`${BACKEND_URL}${Booth.image}`}
+                  width="320px"
+                  height="320px"
+                  alt="boothimg"
+                />
+              </Boothimg>
+              <Boothinfo>
+                <Boothname>{Booth.name}</Boothname>
+                <Intro>
+                  <BoothintroContent> {Booth.introduce}</BoothintroContent>
+                </Intro>
+                <Detail_detail>
+                  <Time>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/timeicon.png`}
+                      width="14px"
+                      height="17px"
+                      alt="timeicon"
+                    />
+                    <Time_detail>{Booth.date}</Time_detail>
+                  </Time>
+                  <Place>
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/placeicon.png`}
+                      width="13.993px"
+                      height="17px"
+                      alt="placeicon"
+                    />
+                    <Place_detail>{Booth.place}</Place_detail>
+                  </Place>
+                </Detail_detail>
+              </Boothinfo>
+            </BoothCon>
           </Body>
         </BodyWrapper>
         <Footer>
@@ -307,4 +338,4 @@ const Mappage3 = () => {
     </motion.div>
   );
 };
-export default Mappage3;
+export default Boothdetail;
