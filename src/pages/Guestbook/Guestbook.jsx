@@ -217,26 +217,6 @@ const Guestbook = () => {
     }
   }, [commentsWithSomBox]);
 
-  useEffect(() => {
-    async function fetchComments() {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/guestbook/", {
-          content: comment,
-        });
-        if (response.status === 200) {
-          const comments = response.data; // 서버에서 받아온 댓글 목록
-          setCommentsWithSomBox(comments); // 댓글 목록을 상태에 설정
-        } else {
-          console.error("댓글 목록을 불러오는데 실패했습니다.");
-        }
-      } catch (error) {
-        console.error("댓글 목록을 불러오는 중 오류가 발생했습니다.", error);
-      }
-    }
-
-    fetchComments(); // 함수 실행
-  }, []); // 빈 배열을 전달하여 컴포넌트가 로드될 때 한 번만 실행되도록 설정
-
   const addComment = async () => {
     if (comment.trim() !== "") {
       try {
