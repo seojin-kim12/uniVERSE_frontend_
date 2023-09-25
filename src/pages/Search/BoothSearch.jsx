@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import axios from "axios";
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  text-align: center;\
+  text-align: center;
   background-color: #000204;
 
   /* 미디어 쿼리 적용 */
@@ -120,6 +122,7 @@ const ContentBox = styled.div`
   margin-bottom: 19px;
 `;
 const BoothWrapper = styled.div`
+  cursor: pointer;
   position: relative;
   border-radius: 14px;
   border: 1px solid #4fdfff;
@@ -134,7 +137,7 @@ const BoothWrapper = styled.div`
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  height: 97px;
+  height: 95px;
   box-sizing: border-box;
   margin-top: 23px;
   &:first-child {
@@ -145,8 +148,9 @@ const BoothPic = styled.div`
   width: 95px;
   height: 95px;
   display: inline-block;
-  border-radius: 14px;
-  border: 1px solid #4fdfff;
+  left: -2px;
+  margin-left: -2px;
+  margin-top: 3px;
 `;
 const BoothContent = styled.div`
   margin-right: auto;
@@ -168,8 +172,14 @@ const Boothintro = styled.div`
   position: absolute;
   top: 30px;
   padding-right: 10px;
+  padding-top: 6px;
+  height: 50px;
+  overflow: hidden; /* 내용이 영역을 넘어갈 경우 숨김 처리 */
 `;
-
+const BoothintroContent = styled.div`
+  height: 100%;
+  overflow-y: auto; /* 세로 스크롤바 표시 */
+`;
 const Footer = styled.div`
   height: 150px;
   position: relative;
@@ -235,15 +245,27 @@ const BoothSearch = () => {
   const navigateToBack = () => {
     navigate(-1);
   };
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearchSubmit(); // Enter 입력이 되면 클릭 이벤트 실행
+    }
+  };
+  const handleSearchInputChange = (e) => {
+    setName(e.target.value); // 입력 필드 값이 변경될 때 name 상태 업데이트
+  };
+  const [name, setName] = useState("");
+  const [category, setCategory] = useState("day1");
 
-  const [clickedElement, setClickedElement] = useState(null);
+  const [clickedElement, setClickedElement] = useState("four"); // 초기값을 "four"로 설정
 
   const handleElementClick = (element) => {
     setClickedElement(element);
+
+    //날짜 클릭 시 상태 초기화
+    setDay1booth([]);
+    setDay2booth([]);
+    setDay3booth([]);
   };
-  useEffect(() => {
-    setClickedElement("four");
-  }, []);
 
   const getBorderStyle = (element) => ({
     color: "#FFF",
@@ -252,138 +274,269 @@ const BoothSearch = () => {
     cursor: "pointer",
   });
 
+  //axios_backend 연동작업 시작
+  const [Day1booth, setDay1booth] = useState([]);
+  const [Day2booth, setDay2booth] = useState([]);
+  const [Day3booth, setDay3booth] = useState([]);
+  const BACKEND_URL = "http://127.0.0.1:8000";
+  useEffect(
+    function () {
+      let apiUrl = "";
+
+      // 각 날짜에 따라 다른 API 엔드포인트 설정
+      if (clickedElement === "four") {
+        apiUrl = `${BACKEND_URL}/day1-booth/`;
+      } else if (clickedElement === "five") {
+        apiUrl = `${BACKEND_URL}/day2-booth/`;
+      } else if (clickedElement === "six") {
+        apiUrl = `${BACKEND_URL}/day3-booth/`;
+      }
+
+      if (apiUrl) {
+        axios
+          .get(apiUrl)
+          .then(function (result) {
+            // 각 날짜에 맞는 상태에 데이터 저장
+            if (clickedElement === "four") {
+              setDay1booth(result.data);
+            } else if (clickedElement === "five") {
+              setDay2booth(result.data);
+            } else if (clickedElement === "six") {
+              setDay3booth(result.data);
+            }
+            console.log("성공");
+          })
+          .catch(function (error) {
+            console.error("에러 발생 : ", error);
+          });
+      }
+    },
+    [clickedElement]
+  );
+
+  const handleSearchSubmit = () => {
+    // 검색어와 함께 검색 결과 페이지로 이동
+    const encodedName = encodeURIComponent(name);
+    const encodedCategory = encodeURIComponent(category);
+
+    // Axios를 사용하여 GET 요청 보내기
+    axios
+      .get(
+        `${BACKEND_URL}/booth-search/?name=${encodedName}&category=${encodedCategory}`
+      )
+      .then((response) => {
+        navigate(
+          `/BoothSearchSuccess/?name=${encodedName}&category=${encodedCategory}`
+        );
+      })
+      .catch(function (error) {
+        navigate(
+          `/BoothSearchSuccess/?name=${encodedName}&category=${encodedCategory}`
+        );
+      });
+  };
+  const imgStyle = {
+    borderRadius: "14px",
+    border: "1px solid #4fdfff",
+  };
   return (
-    <Container>
-      <BodyWrapper>
-        <Topbar>
-          <Back>
-            <img
-              src={`${process.env.PUBLIC_URL}/images/back.png`}
-              width="24px"
-              height="24px"
-              onClick={() => navigateToBack()}
-            />
-          </Back>
-          <Toptitle>부스 배치도</Toptitle>
-        </Topbar>
-        <Body>
-          <SearchWrapper>
-            <Search placeholder="부스 이름을 검색하세요." />
-            <SearchButton>
+    // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container>
+        <BodyWrapper>
+          <Topbar>
+            <Back>
               <img
-                src={`${process.env.PUBLIC_URL}/images/search-button.png`}
-                width="17px"
-                height="17px"
+                src={`${process.env.PUBLIC_URL}/images/backbtn.png`}
+                width="24px"
+                height="24px"
+                onClick={() => navigateToBack()}
               />
-            </SearchButton>
-          </SearchWrapper>
-          <ContentWrapper>
-            <DateWrapper>
-              <Four
-                style={getBorderStyle("four")}
-                onClick={() => handleElementClick("four")}
-              >
-                04/WED
-              </Four>
-              <Five
-                style={getBorderStyle("five")}
-                onClick={() => handleElementClick("five")}
-              >
-                05/THU
-              </Five>
-              <Six
-                style={getBorderStyle("six")}
-                onClick={() => handleElementClick("six")}
-              >
-                06/FRI
-              </Six>
-            </DateWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="100%"
-                height="1px"
-                alt="footer"
+            </Back>
+            <Toptitle>부스 배치도</Toptitle>
+          </Topbar>
+          <Body>
+            <SearchWrapper>
+              <Search
+                placeholder="부스 이름을 검색하세요."
+                value={name}
+                onKeyPress={handleOnKeyPress}
+                onChange={handleSearchInputChange}
               />
-            </Line>
-            <ContentBox>
-              <BoothWrapper>
-                <BoothPic>
-                  <img
-                    src={`${process.env.PUBLIC_URL}/images/BoothPic-sample.png`}
-                    width="95px"
-                    height="95px"
-                  />
-                </BoothPic>
-                <BoothContent>
-                  <BoothName>우주특공솜: 비밀서류를 찾아라</BoothName>
-                  <Boothintro>
-                    참가자들은 달에 갈 수 있는 기회를 얻기 위해 서바이벌 단체
-                    O/X 퀴즈를 풀어야 하며, 문제는 동덕여대, 노래, 우주 등의
-                    주제로 이루어져 있습니다. 최후의 3인에게는 달에 착륙할 수
-                    있는 기회와 어마어마한 상품이 주어집니다.
-                  </Boothintro>
-                </BoothContent>
-              </BoothWrapper>
-            </ContentBox>
-          </ContentWrapper>
-        </Body>
-      </BodyWrapper>
-      <Footer>
-        <Left>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Left>
-        <FooterContentWrapper>
-          <Base>
+              <SearchButton onClick={handleSearchSubmit}>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/search-button.png`}
+                  width="17px"
+                  height="17px"
+                />
+              </SearchButton>
+            </SearchWrapper>
+            <ContentWrapper>
+              <DateWrapper>
+                <Four
+                  style={getBorderStyle("four")}
+                  onClick={() => handleElementClick("four")}
+                >
+                  04/WED
+                </Four>
+                <Five
+                  style={getBorderStyle("five")}
+                  onClick={() => handleElementClick("five")}
+                >
+                  05/THU
+                </Five>
+                <Six
+                  style={getBorderStyle("six")}
+                  onClick={() => handleElementClick("six")}
+                >
+                  06/FRI
+                </Six>
+              </DateWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="100%"
+                  height="1px"
+                  alt="footer"
+                />
+              </Line>
+              <ContentBox>
+                {Day1booth.map((day1booth) => (
+                  <BoothWrapper
+                    key={day1booth.boothId}
+                    onClick={() =>
+                      navigate(`/booth-detail/${day1booth.boothId}/`)
+                    }
+                  >
+                    <BoothPic>
+                      <img
+                        src={`${BACKEND_URL}${day1booth.image}`}
+                        alt={day1booth.name}
+                        width="91px"
+                        height="91px"
+                        style={imgStyle}
+                      />
+                    </BoothPic>
+                    <BoothContent>
+                      <BoothName>{day1booth.name}</BoothName>
+                      <Boothintro>
+                        <BoothintroContent>
+                          {day1booth.introduce}
+                        </BoothintroContent>
+                      </Boothintro>
+                    </BoothContent>
+                  </BoothWrapper>
+                ))}
+
+                {Day2booth.map((day2booth) => (
+                  <BoothWrapper
+                    key={day2booth.boothId}
+                    onClick={() =>
+                      navigate(`/booth-detail/${day2booth.boothId}/`)
+                    }
+                  >
+                    <BoothPic>
+                      <img
+                        src={`${BACKEND_URL}${day2booth.image}`}
+                        alt={day2booth.name}
+                        width="91px"
+                        height="91px"
+                        style={imgStyle}
+                      />
+                    </BoothPic>
+                    <BoothContent>
+                      <BoothName>{day2booth.name}</BoothName>
+                      <Boothintro>{day2booth.introduce}</Boothintro>
+                    </BoothContent>
+                  </BoothWrapper>
+                ))}
+
+                {Day3booth.map((day3booth) => (
+                  <BoothWrapper
+                    key={day3booth.boothId}
+                    onClick={() =>
+                      navigate(`/booth-detail/${day3booth.boothId}/`)
+                    }
+                  >
+                    <BoothPic>
+                      <img
+                        src={`${BACKEND_URL}${day3booth.image}`}
+                        alt={day3booth.name}
+                        width="91px"
+                        height="91px"
+                        style={imgStyle}
+                      />
+                    </BoothPic>
+                    <BoothContent>
+                      <BoothName>{day3booth.name}</BoothName>
+                      <Boothintro>{day3booth.introduce}</Boothintro>
+                    </BoothContent>
+                  </BoothWrapper>
+                ))}
+              </ContentBox>
+            </ContentWrapper>
+          </Body>
+        </BodyWrapper>
+        <Footer>
+          <Left>
             <img
-              src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
-              width="100%"
-              height="148px"
+              src={`${process.env.PUBLIC_URL}/images/footer-left.png`}
+              width="55px"
               alt="footer"
             />
-          </Base>
-          <FooterContent>
-            <ManagementWrapper>
-              <p className="bold">축제 총 기획</p>
-              <p>동덕여대 축제 준비 위원회</p>
-            </ManagementWrapper>
-            <Line>
+          </Left>
+          <FooterContentWrapper>
+            <Base>
               <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
+                src={`${process.env.PUBLIC_URL}/images/footer-base.png`}
+                width="100%"
+                height="148px"
                 alt="footer"
               />
-            </Line>
-            <FestivalWrapper>
-              <p id="marginBottom">2023 동덕여자대학교 대동제</p>
-              <p className="bold">동덕 uniVERSE</p>
-            </FestivalWrapper>
-            <Line>
-              <img
-                src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
-                width="253px"
-                alt="footer"
-              />
-            </Line>
-            <DevelopmentWrapper>
-              <p className="bold">축제 웹사이트 제작</p>
-              <p>동덕여대 멋쟁이사자처럼</p>
-            </DevelopmentWrapper>
-          </FooterContent>
-        </FooterContentWrapper>
-        <Right>
-          <img
-            src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
-            width="55px"
-            alt="footer"
-          />
-        </Right>
-      </Footer>
-    </Container>
+            </Base>
+            <FooterContent>
+              <ManagementWrapper>
+                <p className="bold">축제 총 기획</p>
+                <p>동덕여대 축제 준비 위원회</p>
+              </ManagementWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <FestivalWrapper>
+                <p id="marginBottom">2023 동덕여자대학교 대동제</p>
+                <p className="bold">동덕 uniVERSE</p>
+              </FestivalWrapper>
+              <Line>
+                <img
+                  src={`${process.env.PUBLIC_URL}/images/footer-line.png`}
+                  width="253px"
+                  alt="footer"
+                />
+              </Line>
+              <DevelopmentWrapper>
+                <p className="bold">축제 웹사이트 제작</p>
+                <p>동덕여대 멋쟁이사자처럼</p>
+              </DevelopmentWrapper>
+            </FooterContent>
+          </FooterContentWrapper>
+          <Right>
+            <img
+              src={`${process.env.PUBLIC_URL}/images/footer-right.png`}
+              width="55px"
+              alt="footer"
+            />
+          </Right>
+        </Footer>
+      </Container>
+    </motion.div>
   );
 };
 export default BoothSearch;
