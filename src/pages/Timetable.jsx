@@ -44,7 +44,7 @@ const Body = styled.div`
   .date_wed,
   .date_thu,
   .date_fri {
-    animation: 0.3s ease-in-out loadEffect1; 
+    animation: 0.7s ease-in-out loadEffect1; 
   }
 
   @keyframes loadEffect1 {

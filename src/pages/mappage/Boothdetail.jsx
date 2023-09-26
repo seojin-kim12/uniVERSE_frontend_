@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useState, useEffect } from "react"; // useState와 useEffect 추가
+
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -221,10 +222,13 @@ const Boothdetail = () => {
         console.error("에러 발생: ", error);
       });
   }, [boothId]);
-
   return (
     // 다른 페이지로 자연스럽게 넘어가기 위해 추가함
     <motion.div
+      initial="initial"
+      animate="in"
+      exit="out"
+      transition={{ duration: 5 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
